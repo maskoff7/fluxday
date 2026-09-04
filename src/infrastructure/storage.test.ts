@@ -1,4 +1,5 @@
 import { beforeEach, expect, it } from "vitest";
+import { buildForecast } from "../domain/forecast";
 import { makeOperation } from "../domain/state";
 import { browserStorageKey, loadState, saveState } from "./storage";
 
@@ -6,6 +7,7 @@ beforeEach(() => localStorage.clear());
 
 it("persists an operation and restores a normalized plan", async () => {
   const loaded = await loadState();
+  loaded.state.settings.startDate = "2026-01-01";
   loaded.state.operations.push(
     makeOperation({
       name: "Salary",
@@ -22,6 +24,13 @@ it("persists an operation and restores a normalized plan", async () => {
   const restored = await loadState();
   expect(restored.isNew).toBe(false);
   expect(restored.state.operations[0].amountMinor).toBe(100_000_00);
+  expect(
+    buildForecast(
+      restored.state.settings.startBalanceMinor,
+      restored.state.settings.startDate,
+      restored.state.operations,
+    ).endingBalanceMinor,
+  ).toBe(100_000_00);
 });
 
 it("recovers safely from a corrupt browser snapshot", async () => {

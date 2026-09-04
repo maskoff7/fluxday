@@ -1,4 +1,9 @@
-import { isCalendarDate, todayCalendarDate } from "./date";
+import {
+  defaultRecurrenceEnd,
+  isCalendarDate,
+  maxPlanningDate,
+  todayCalendarDate,
+} from "./date";
 import { legacyMoneyToMinor } from "./money";
 import {
   CERTAINTIES,
@@ -141,7 +146,7 @@ export function parseImportText(
       recurrenceEndDate:
         recurrence !== "none" && isCalendarDate(event.repeatUntil)
           ? event.repeatUntil
-          : null,
+          : defaultRecurrenceEnd(firstDate, recurrence),
       note: String(event.note ?? "").slice(0, 500),
       enabled: true,
       createdAt: now,
@@ -213,7 +218,9 @@ export function parseImportText(
     settings: {
       startBalanceMinor: startBalanceMinor ?? 0,
       startDate: isCalendarDate(settings.startDate)
-        ? settings.startDate
+        ? settings.startDate <= maxPlanningDate(today)
+          ? settings.startDate
+          : today
         : today,
       baseCurrency: "RUB",
       preferences: { onboardingComplete: true },

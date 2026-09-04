@@ -1,4 +1,4 @@
-import { addMonths, eachDay } from "./date";
+import { addMonths, eachDay, maxPlanningDate } from "./date";
 import { expandOccurrences } from "./recurrence";
 import type {
   CalendarDate,
@@ -13,6 +13,7 @@ export function forecastHorizon(
   operations: Operation[],
 ): CalendarDate {
   let horizon = addMonths(startDate, 6);
+  const maximum = maxPlanningDate(startDate);
   for (const operation of operations) {
     const end =
       operation.recurrence === "none"
@@ -20,7 +21,7 @@ export function forecastHorizon(
         : operation.recurrenceEndDate;
     if (operation.enabled && end && end > horizon) horizon = end;
   }
-  return horizon;
+  return horizon > maximum ? maximum : horizon;
 }
 
 export function buildForecast(
@@ -29,6 +30,9 @@ export function buildForecast(
   operations: Operation[],
   endDate = forecastHorizon(startDate, operations),
 ): Forecast {
+  if (endDate > maxPlanningDate(startDate)) {
+    throw new Error("Горизонт планирования не может превышать 100 лет.");
+  }
   const occurrences = expandOccurrences(operations, startDate, endDate);
   const byDate = new Map<CalendarDate, typeof occurrences>();
   for (const occurrence of occurrences) {

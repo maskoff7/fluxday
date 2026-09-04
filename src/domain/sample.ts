@@ -47,7 +47,7 @@ export function sampleState(today = todayCalendarDate()): AppState {
     makeOperation({
       name: "Перелёт и отель для большой осенней поездки",
       type: "expense",
-      amountMinor: 155_000_00,
+      amountMinor: 350_000_00,
       certainty: "certain",
       firstDate: addDays(today, 50),
       recurrence: "none",
