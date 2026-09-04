@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { buildForecast } from "./forecast";
 import { exportPayload, parseImportText } from "./import";
 
 const legacy = {
@@ -46,6 +47,13 @@ describe("legacy import", () => {
     expect(result.state.settings.startBalanceMinor).toBe(123_456);
     expect(result.state.operations[0].amountMinor).toBe(50_025);
     expect(result.state.scenarios[0].overrides.rent.amountMinor).toBe(70_050);
+    const forecast = buildForecast(
+      result.state.settings.startBalanceMinor,
+      result.state.settings.startDate,
+      result.state.operations,
+    );
+    expect(forecast.endingBalanceMinor).toBe(-26_619);
+    expect(forecast.firstNegativeDate).toBe("2026-03-31");
   });
 
   it("is idempotent because confirmation replaces the plan", () => {
@@ -54,6 +62,13 @@ describe("legacy import", () => {
     expect(second.state.operations.map((item) => item.id)).toEqual(
       first.state.operations.map((item) => item.id),
     );
+  });
+
+  it("supplies the legacy default end date when a recurring series omitted it", () => {
+    const missingEnd = structuredClone(legacy);
+    delete (missingEnd.events[0] as { repeatUntil?: string }).repeatUntil;
+    const result = parseImportText(JSON.stringify(missingEnd), "2026-01-01");
+    expect(result.state.operations[0].recurrenceEndDate).toBe("2026-02-28");
   });
 
   it("round-trips the current format", () => {
@@ -69,5 +84,14 @@ describe("legacy import", () => {
   it("rejects corrupt imports before changing state", () => {
     expect(() => parseImportText("{}")).toThrow(/Не найден экспорт/);
     expect(() => parseImportText("not json")).toThrow(/корректным JSON/);
+  });
+
+  it("recovers from an unsupported far-future start date", () => {
+    const farFuture = structuredClone(legacy);
+    farFuture.settings.startDate = "9999-12-31";
+    expect(
+      parseImportText(JSON.stringify(farFuture), "2026-01-01").state.settings
+        .startDate,
+    ).toBe("2026-01-01");
   });
 });

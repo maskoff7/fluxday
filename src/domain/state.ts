@@ -1,5 +1,5 @@
-import { isCalendarDate, todayCalendarDate } from "./date";
-import { isMoneyMinor } from "./money";
+import { isCalendarDate, maxPlanningDate, todayCalendarDate } from "./date";
+import { isMoneyMinor, MAX_MONEY_MINOR } from "./money";
 import type {
   AppState,
   Certainty,
@@ -73,9 +73,15 @@ export function normalizeState(
   if (!raw) throw new Error("Файл не содержит объект плана.");
   const rawSettings = record(raw.settings) ?? {};
   const state = emptyState(today);
-  if (isMoneyMinor(rawSettings.startBalanceMinor))
+  if (
+    isMoneyMinor(rawSettings.startBalanceMinor) &&
+    Math.abs(rawSettings.startBalanceMinor) <= MAX_MONEY_MINOR
+  )
     state.settings.startBalanceMinor = rawSettings.startBalanceMinor;
-  if (isCalendarDate(rawSettings.startDate))
+  if (
+    isCalendarDate(rawSettings.startDate) &&
+    rawSettings.startDate <= maxPlanningDate(today)
+  )
     state.settings.startDate = rawSettings.startDate;
   const preferences = record(rawSettings.preferences);
   if (preferences && typeof preferences.onboardingComplete === "boolean") {
@@ -96,6 +102,7 @@ export function normalizeState(
         !name ||
         !isMoneyMinor(amountMinor, false) ||
         amountMinor <= 0 ||
+        amountMinor > MAX_MONEY_MINOR ||
         !isCalendarDate(operation.firstDate)
       )
         continue;

@@ -1,6 +1,8 @@
 import type { MoneyMinor } from "./types";
 
-const MAX_MINOR = Number.MAX_SAFE_INTEGER;
+// A deliberate personal-planning ceiling keeps arithmetic exact even across
+// long recurring series while still allowing values up to 100 million RUB.
+export const MAX_MONEY_MINOR = 10_000_000_000;
 
 export function isMoneyMinor(
   value: unknown,
@@ -13,7 +15,10 @@ export function parseMoneyInput(
   value: string,
   allowNegative = false,
 ): MoneyMinor | null {
-  const normalized = value.trim().replace(/[\s\u00a0]/g, "").replace(",", ".");
+  const normalized = value
+    .trim()
+    .replace(/[\s\u00a0]/g, "")
+    .replace(",", ".");
   const match = normalized.match(
     allowNegative ? /^(-?)(\d+)(?:\.(\d{0,2}))?$/ : /^(\d+)(?:\.(\d{0,2}))?$/,
   );
@@ -24,7 +29,7 @@ export function parseMoneyInput(
   const whole = Number(match[wholeIndex]);
   const fraction = Number((match[fractionIndex] ?? "").padEnd(2, "0"));
   const result = whole * 100 + fraction;
-  if (!Number.isSafeInteger(result) || result > MAX_MINOR) return null;
+  if (!Number.isSafeInteger(result) || result > MAX_MONEY_MINOR) return null;
   return negative ? -result : result;
 }
 
@@ -37,7 +42,10 @@ export function legacyMoneyToMinor(
     typeof value === "number" ? value : Number(String(value).replace(",", "."));
   if (!Number.isFinite(numeric) || (!allowNegative && numeric < 0)) return null;
   const minor = Math.round(numeric * 100);
-  return isMoneyMinor(minor, allowNegative) ? minor : null;
+  return isMoneyMinor(minor, allowNegative) &&
+    Math.abs(minor) <= MAX_MONEY_MINOR
+    ? minor
+    : null;
 }
 
 export function moneyInputValue(value: MoneyMinor): string {

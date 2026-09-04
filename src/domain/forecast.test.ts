@@ -54,4 +54,10 @@ describe("cash-flow forecast", () => {
     expect(forecast.stressFirstNegativeDate).toBe("2026-01-02");
     expect(forecast.minimumBalanceMinor).toBe(20_00);
   });
+
+  it("rejects an explicit horizon beyond the supported planning window", () => {
+    expect(() => buildForecast(0, "2026-01-01", [], "2200-01-01")).toThrow(
+      /100 лет/,
+    );
+  });
 });

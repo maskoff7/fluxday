@@ -86,6 +86,21 @@ export function addYears(value: CalendarDate, count: number): CalendarDate {
   });
 }
 
+export const MAX_PLAN_YEARS = 100;
+
+export function maxPlanningDate(value: CalendarDate): CalendarDate {
+  const parts = parseCalendarDate(value);
+  if (!parts) throw new Error(`Invalid calendar date: ${value}`);
+  if (parts.year + MAX_PLAN_YEARS > 9999) return "9999-12-31";
+  return addYears(value, MAX_PLAN_YEARS);
+}
+
+export function daysBetween(start: CalendarDate, end: CalendarDate): number {
+  return Math.floor(
+    (toUtcDate(end).getTime() - toUtcDate(start).getTime()) / 86_400_000,
+  );
+}
+
 export function startOfMonth(value: CalendarDate): CalendarDate {
   const parts = parseCalendarDate(value);
   if (!parts) throw new Error(`Invalid calendar date: ${value}`);
@@ -125,6 +140,7 @@ export function eachDay(
   const result: CalendarDate[] = [];
   for (let cursor = start; cursor <= end; cursor = addDays(cursor, 1)) {
     result.push(cursor);
+    if (cursor === end) break;
     if (result.length > 40_000)
       throw new Error("Forecast range exceeds 40,000 days");
   }

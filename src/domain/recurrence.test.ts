@@ -31,6 +31,19 @@ describe("recurrence expansion", () => {
     ]);
   });
 
+  it("jumps to an old daily anchor without truncating the visible range", () => {
+    const item = operation({
+      firstDate: "1900-01-01",
+      recurrence: "daily",
+      recurrenceEndDate: "2026-01-03",
+    });
+    expect(occurrenceDates(item, "2026-01-01", "2026-01-03")).toEqual([
+      "2026-01-01",
+      "2026-01-02",
+      "2026-01-03",
+    ]);
+  });
+
   it("maps leap-day yearly recurrence to valid dates", () => {
     expect(
       occurrenceDates(
