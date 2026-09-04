@@ -2,6 +2,8 @@
 
 **Your money, mapped day by day.** Fluxday is a private, local-first cash-flow planner for macOS. It shows when a future balance becomes tight, which payments caused it and how recurring-operation scenarios change the result.
 
+![Fluxday timeline with cash-gap intelligence](docs/screenshots/timeline-gap.png)
+
 ## Highlights
 
 - Daily timeline, balance chart, Monday-first financial calendar and recurring-series management.
@@ -51,5 +53,7 @@ Production data is stored in `fluxday.sqlite3` under the operating system's appl
 - [Brand](docs/brand.md)
 - [Testing](docs/testing.md)
 - [Product backlog](docs/product-backlog.md)
+- [v0.1.0 release notes](docs/release-v0.1.0.md)
+- [Development and contributions](CONTRIBUTING.md)
 
 The original prototype is preserved in `reference/legacy/`. No license has been selected.
