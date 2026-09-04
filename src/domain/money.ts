@@ -13,7 +13,10 @@ export function parseMoneyInput(
   value: string,
   allowNegative = false,
 ): MoneyMinor | null {
-  const normalized = value.trim().replace(/[\s\u00a0]/g, "").replace(",", ".");
+  const normalized = value
+    .trim()
+    .replace(/[\s\u00a0]/g, "")
+    .replace(",", ".");
   const match = normalized.match(
     allowNegative ? /^(-?)(\d+)(?:\.(\d{0,2}))?$/ : /^(\d+)(?:\.(\d{0,2}))?$/,
   );
