@@ -21,6 +21,12 @@ xcodebuild \
 
 The v0.1.0 Tauri application remains buildable from the repository root during the migration.
 
+Run the reusable financial core tests independently:
+
+```sh
+swift test --package-path native/CashFlowCore
+```
+
 ## Bootstrap preview
 
 ![Native Fluxday application shell in English](../docs/screenshots/native-bootstrap.png)
