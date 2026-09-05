@@ -877,6 +877,540 @@
         "ru" : { "stringUnit" : { "state" : "translated", "value" : "Повторяющиеся серии" } }
       }
     },
+    "chart.axis.amount" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Amount" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Сумма" } }
+      }
+    },
+    "chart.axis.operation" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Operation" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Операция" } }
+      }
+    },
+    "chart.axis.series" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Series" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Ряд" } }
+      }
+    },
+    "navigation.scenarios" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Scenarios" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Сценарии" } }
+      }
+    },
+    "navigation.summary" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Summary" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Сводка" } }
+      }
+    },
+    "summary.composition.absolute" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Absolute amounts" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Абсолютные суммы" } }
+      }
+    },
+    "summary.composition.expenses" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Expense composition" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Структура расходов" } }
+      }
+    },
+    "summary.composition.income" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Income composition" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Структура доходов" } }
+      }
+    },
+    "summary.composition.share" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Share of selected flow" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Доля выбранного потока" } }
+      }
+    },
+    "summary.composition.turnover" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Turnover composition" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Структура оборота" } }
+      }
+    },
+    "summary.empty.message" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Try another period or flow type." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Выберите другой период или тип потока." } }
+      }
+    },
+    "summary.empty.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No activity in this period" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "В этом периоде нет операций" } }
+      }
+    },
+    "summary.filter.all" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "All" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Все" } }
+      }
+    },
+    "summary.filter.expenses" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Expenses" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Расходы" } }
+      }
+    },
+    "summary.filter.income" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Income" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Доходы" } }
+      }
+    },
+    "summary.filter.label" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Flow type" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Тип потока" } }
+      }
+    },
+    "summary.group.detail" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%@ occurrences · %@" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "%@ появлений · %@" } }
+      }
+    },
+    "summary.loading" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Calculating summary…" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Рассчитываем сводку…" } }
+      }
+    },
+    "summary.metric.expenses" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Expenses" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Расходы" } }
+      }
+    },
+    "summary.metric.income" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Income" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Доходы" } }
+      }
+    },
+    "summary.metric.net" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Net cash flow" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Чистый поток" } }
+      }
+    },
+    "summary.metric.net.help" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Income minus expenses" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Доходы минус расходы" } }
+      }
+    },
+    "summary.metric.occurrences" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Occurrences" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Появления" } }
+      }
+    },
+    "summary.metric.occurrences.help" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Including recurring operations" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "С учётом повторений" } }
+      }
+    },
+    "summary.metric.period" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Selected period" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "За выбранный период" } }
+      }
+    },
+    "summary.period.current" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Current" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Текущий" } }
+      }
+    },
+    "summary.period.custom" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Custom Range" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Свой диапазон" } }
+      }
+    },
+    "summary.period.from" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "From" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "С" } }
+      }
+    },
+    "summary.period.label" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Period" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Период" } }
+      }
+    },
+    "summary.period.month" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Month" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Месяц" } }
+      }
+    },
+    "summary.period.next" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Next period" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Следующий период" } }
+      }
+    },
+    "summary.period.previous" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Previous period" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Предыдущий период" } }
+      }
+    },
+    "summary.period.through" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Through" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "По" } }
+      }
+    },
+    "summary.period.week" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Week" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Неделя" } }
+      }
+    },
+    "summary.period.year" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Year" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Год" } }
+      }
+    },
+    "summary.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Summary" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Сводка" } }
+      }
+    },
+    "summary.trend.cumulative" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Cumulative" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Накопительно" } }
+      }
+    },
+    "summary.trend.daily" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Per occurrence" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "За появление" } }
+      }
+    },
+    "summary.trend.eyebrow" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Operation trend" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Динамика операции" } }
+      }
+    },
+    "scenarios.actions" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Scenario Actions" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Действия со сценарием" } }
+      }
+    },
+    "scenarios.base" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Base plan" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Базовый план" } }
+      }
+    },
+    "scenarios.chart.accessibility" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Base plan compared with scenario" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Сравнение базового плана со сценарием" } }
+      }
+    },
+    "scenarios.chart.eyebrow" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Base vs. scenario" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "База и сценарий" } }
+      }
+    },
+    "scenarios.chart.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "How the balance changes" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Как изменится баланс" } }
+      }
+    },
+    "scenarios.copyName" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Copy of %@" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Копия %@" } }
+      }
+    },
+    "scenarios.create" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "New Scenario" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Новый сценарий" } }
+      }
+    },
+    "scenarios.create.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "New Scenario" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Новый сценарий" } }
+      }
+    },
+    "scenarios.delete" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Delete Scenario" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Удалить сценарий" } }
+      }
+    },
+    "scenarios.delete.message" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "This permanently deletes “%@”." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Сценарий «%@» будет удалён без возможности восстановления." } }
+      }
+    },
+    "scenarios.delete.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Delete this scenario?" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Удалить сценарий?" } }
+      }
+    },
+    "scenarios.duplicate" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Duplicate" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Дублировать" } }
+      }
+    },
+    "scenarios.duplicate.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Duplicate Scenario" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Дублировать сценарий" } }
+      }
+    },
+    "scenarios.empty.message" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Test changes to recurring operations without touching your base plan." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Проверяйте изменения повторяющихся операций, не затрагивая базовый план." } }
+      }
+    },
+    "scenarios.empty.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Create your first scenario" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Создайте первый сценарий" } }
+      }
+    },
+    "scenarios.loading" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Calculating scenario…" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Рассчитываем сценарий…" } }
+      }
+    },
+    "scenarios.metric.baseEnding" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Base ending balance" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Баланс базы в конце" } }
+      }
+    },
+    "scenarios.metric.baseMinimum" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Minimum" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Минимум" } }
+      }
+    },
+    "scenarios.metric.deficit" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Deficit" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Дефицит" } }
+      }
+    },
+    "scenarios.metric.delta" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Change" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Изменение" } }
+      }
+    },
+    "scenarios.metric.firstGap" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "First cash gap" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Первый разрыв" } }
+      }
+    },
+    "scenarios.metric.minimum" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Scenario minimum" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Минимум сценария" } }
+      }
+    },
+    "scenarios.metric.noGap" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "None" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Нет" } }
+      }
+    },
+    "scenarios.metric.scenarioEnding" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Scenario ending balance" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Баланс сценария в конце" } }
+      }
+    },
+    "scenarios.name" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Scenario name" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Название сценария" } }
+      }
+    },
+    "scenarios.override.amount" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Change amount" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Изменить сумму" } }
+      }
+    },
+    "scenarios.override.certainty" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Change certainty" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Изменить точность" } }
+      }
+    },
+    "scenarios.override.changed" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Changed" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Изменено" } }
+      }
+    },
+    "scenarios.override.configure" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Configure" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Настроить" } }
+      }
+    },
+    "scenarios.override.edit" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Edit" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Изменить" } }
+      }
+    },
+    "scenarios.override.endDate" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Change end date" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Изменить дату окончания" } }
+      }
+    },
+    "scenarios.override.exclude" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Exclude this series from the scenario" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Исключить серию из сценария" } }
+      }
+    },
+    "scenarios.override.excluded" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Excluded" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Исключено" } }
+      }
+    },
+    "scenarios.override.firstDate" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Change first date" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Изменить первую дату" } }
+      }
+    },
+    "scenarios.override.hasEndDate" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Scenario series has an end date" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "У серии в сценарии есть дата окончания" } }
+      }
+    },
+    "scenarios.override.help" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Only enabled fields are stored in this scenario. The base operation never changes." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "В сценарии сохраняются только включённые поля. Базовая операция не изменяется." } }
+      }
+    },
+    "scenarios.override.recurrence" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Change frequency" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Изменить частоту" } }
+      }
+    },
+    "scenarios.override.reset" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Use Base Values" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Использовать базовые значения" } }
+      }
+    },
+    "scenarios.override.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Scenario Override" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Изменение для сценария" } }
+      }
+    },
+    "scenarios.override.values" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Changed Values" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Изменённые значения" } }
+      }
+    },
+    "scenarios.overrides.empty" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No recurring operations" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Нет повторяющихся операций" } }
+      }
+    },
+    "scenarios.overrides.empty.message" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add a recurring operation before configuring scenario changes." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Добавьте повторяющуюся операцию, чтобы настроить изменения сценария." } }
+      }
+    },
+    "scenarios.overrides.eyebrow" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Sparse overrides" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Точечные изменения" } }
+      }
+    },
+    "scenarios.overrides.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Recurring operation changes" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Изменения повторяющихся операций" } }
+      }
+    },
+    "scenarios.picker" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Scenario" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Сценарий" } }
+      }
+    },
+    "scenarios.rename" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Rename" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Переименовать" } }
+      }
+    },
+    "scenarios.rename.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Rename Scenario" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Переименовать сценарий" } }
+      }
+    },
+    "scenarios.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Scenarios" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Сценарии" } }
+      }
+    },
+    "validation.scenario.endDate" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "The end date cannot be earlier than the first date." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Дата окончания не может быть раньше первой даты." } }
+      }
+    },
+    "validation.scenario.name" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Enter a name up to 80 characters." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Введите название длиной до 80 символов." } }
+      }
+    },
     "startingPoint.balance" : {
       "localizations" : {
         "en" : { "stringUnit" : { "state" : "translated", "value" : "Starting balance" } },
