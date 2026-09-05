@@ -55,6 +55,7 @@ Production data is stored in `fluxday.sqlite3` under the operating system's appl
 - [Brand](docs/brand.md)
 - [Testing](docs/testing.md)
 - [Financial algorithms](docs/financial-algorithms.md)
+- [Native data storage and migration](docs/native-data-migration.md)
 - [Product backlog](docs/product-backlog.md)
 - [v0.1.0 release notes](docs/release-v0.1.0.md)
 - [Native macOS migration plan](docs/native-macos-migration.md)

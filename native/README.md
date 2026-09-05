@@ -25,6 +25,7 @@ Run the reusable financial core tests independently:
 
 ```sh
 swift test --package-path native/CashFlowCore
+swift test --package-path native/FluxdayPersistence
 ```
 
 ## Bootstrap preview

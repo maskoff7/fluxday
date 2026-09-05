@@ -5,6 +5,7 @@ private enum SidebarDestination: Hashable {
 }
 
 struct ContentView: View {
+  @EnvironmentObject private var model: AppModel
   @State private var selection: SidebarDestination? = .overview
 
   var body: some View {
@@ -24,6 +25,26 @@ struct ContentView: View {
           Label("toolbar.settings", systemImage: "gearshape")
         }
       }
+    }
+    .overlay {
+      if model.isLoading {
+        ProgressView("persistence.loading")
+          .padding()
+          .background(.regularMaterial, in: .rect(cornerRadius: 12))
+      }
+    }
+    .sheet(item: $model.migrationPreview) { preview in
+      MigrationView(
+        preview: preview,
+        isImporting: model.isMigrating,
+        importAction: { Task { await model.confirmMigration() } },
+        laterAction: model.dismissMigration
+      )
+    }
+    .alert("persistence.error.title", isPresented: $model.showsPersistenceError) {
+      Button("button.ok", role: .cancel) {}
+    } message: {
+      Text("persistence.error.message")
     }
   }
 }

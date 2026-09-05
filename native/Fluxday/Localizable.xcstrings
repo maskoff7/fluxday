@@ -1,6 +1,12 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "button.ok" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "OK" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "ОК" } }
+      }
+    },
     "app.name" : {
       "localizations" : {
         "en" : {
@@ -81,6 +87,54 @@
         }
       }
     },
+    "migration.import" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Import Data" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Импортировать" } }
+      }
+    },
+    "migration.later" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Not Now" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Не сейчас" } }
+      }
+    },
+    "migration.message" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Fluxday found data from v0.1.0. Review the totals before copying it into the native app." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Fluxday нашёл данные версии 0.1.0. Проверьте количество записей перед копированием в нативное приложение." } }
+      }
+    },
+    "migration.operations" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Operations" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Операции" } }
+      }
+    },
+    "migration.recurring" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Recurring series" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Повторяющиеся серии" } }
+      }
+    },
+    "migration.safety" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Your v0.1.0 database stays unchanged. You can continue using the released app." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "База версии 0.1.0 останется без изменений. Вы сможете продолжить пользоваться выпущенным приложением." } }
+      }
+    },
+    "migration.scenarios" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Scenarios" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Сценарии" } }
+      }
+    },
+    "migration.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Bring Your Data to Native Fluxday" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Перенесите данные в нативный Fluxday" } }
+      }
+    },
     "overview.empty.message" : {
       "localizations" : {
         "en" : {
@@ -127,6 +181,24 @@
             "value" : "Денежный поток"
           }
         }
+      }
+    },
+    "persistence.error.message" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Your existing data was not changed. Try again or import a Fluxday JSON backup." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Существующие данные не изменены. Повторите попытку или импортируйте резервную копию Fluxday JSON." } }
+      }
+    },
+    "persistence.error.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Data Could Not Be Loaded" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Не удалось загрузить данные" } }
+      }
+    },
+    "persistence.loading" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Loading your plan…" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Загрузка плана…" } }
       }
     },
     "settings.language.help" : {
