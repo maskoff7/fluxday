@@ -14,9 +14,9 @@ enum AppLanguage: String, CaseIterable, Identifiable {
     case .system:
       .autoupdatingCurrent
     case .english:
-      Locale(identifier: "en")
+      Locale(identifier: "en_US")
     case .russian:
-      Locale(identifier: "ru")
+      Locale(identifier: "ru_RU")
     }
   }
 

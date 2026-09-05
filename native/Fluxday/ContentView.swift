@@ -1,26 +1,46 @@
+import CashFlowCore
 import SwiftUI
 
 private enum SidebarDestination: Hashable {
   case overview
+  case operations
 }
 
 struct ContentView: View {
   @EnvironmentObject private var model: AppModel
   @State private var selection: SidebarDestination? = .overview
+  @State private var editorIntent: OperationEditorIntent?
 
   var body: some View {
     NavigationSplitView {
       List(selection: $selection) {
         Label("navigation.overview", systemImage: "chart.line.uptrend.xyaxis")
           .tag(SidebarDestination.overview)
+        Label("navigation.operations", systemImage: "list.bullet.rectangle")
+          .badge(model.plan.operations.count)
+          .tag(SidebarDestination.operations)
       }
       .navigationTitle("app.name")
       .navigationSplitViewColumnWidth(min: 180, ideal: 220)
     } detail: {
-      OverviewView()
+      switch selection ?? .overview {
+      case .overview:
+        OverviewView(addOperation: createOperation)
+      case .operations:
+        OperationsView(
+          addAction: createOperation,
+          editAction: editOperation,
+          duplicateAction: duplicateOperation
+        )
+      }
     }
     .toolbar {
-      ToolbarItem(placement: .primaryAction) {
+      ToolbarItemGroup(placement: .primaryAction) {
+        Button(action: createOperation) {
+          Label("operation.add", systemImage: "plus")
+        }
+        .keyboardShortcut("n", modifiers: .command)
+
         SettingsLink {
           Label("toolbar.settings", systemImage: "gearshape")
         }
@@ -41,23 +61,31 @@ struct ContentView: View {
         laterAction: model.dismissMigration
       )
     }
+    .sheet(item: $editorIntent) { intent in
+      OperationEditor(intent: intent, saveAction: model.saveOperation)
+    }
     .alert("persistence.error.title", isPresented: $model.showsPersistenceError) {
       Button("button.ok", role: .cancel) {}
     } message: {
       Text("persistence.error.message")
     }
-  }
-}
-
-private struct OverviewView: View {
-  @Environment(\.locale) private var locale
-
-  var body: some View {
-    ContentUnavailableView {
-      Label("overview.empty.title", systemImage: "calendar.badge.clock")
-    } description: {
-      Text("overview.empty.message")
+    .alert("calculation.error.title", isPresented: $model.showsCalculationError) {
+      Button("button.ok", role: .cancel) {}
+    } message: {
+      Text("calculation.error.message")
     }
-    .navigationTitle(AppLocalization.string("overview.title", locale: locale))
+    .frame(minWidth: 720, minHeight: 520)
+  }
+
+  private func createOperation() {
+    editorIntent = .create
+  }
+
+  private func editOperation(_ operation: CashFlowCore.Operation) {
+    editorIntent = OperationEditorIntent(mode: .edit, operation: operation)
+  }
+
+  private func duplicateOperation(_ operation: CashFlowCore.Operation) {
+    editorIntent = OperationEditorIntent(mode: .duplicate, operation: operation)
   }
 }

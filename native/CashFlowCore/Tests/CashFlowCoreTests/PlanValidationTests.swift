@@ -40,6 +40,25 @@ final class PlanValidationTests: XCTestCase {
     }
   }
 
+  func testRejectsARecurringSeriesBeyondThePlanningHorizon() throws {
+    let recurring = try operation(
+      id: "rent",
+      recurrence: .yearly,
+      recurrenceEndDate: "2126-01-03"
+    )
+    let plan = CashFlowPlan(
+      settings: PlanSettings(
+        startBalanceMinor: .zero,
+        startDate: try CalendarDate("2026-01-01")
+      ),
+      operations: [recurring]
+    )
+
+    XCTAssertThrowsError(try PlanValidator.validate(plan)) { error in
+      XCTAssertEqual(error as? PlanValidationError, .invalidRecurrenceEnd("rent"))
+    }
+  }
+
   func testRejectsDuplicateScenarioIdentifiers() throws {
     let plan = CashFlowPlan(
       settings: PlanSettings(

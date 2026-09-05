@@ -40,7 +40,9 @@ public enum PlanValidator {
         throw PlanValidationError.operationNoteTooLong(operation.id)
       }
       let hasValidEndDate =
-        operation.recurrenceEndDate.map({ $0 >= operation.firstDate }) ?? true
+        operation.recurrenceEndDate.map {
+          $0 >= operation.firstDate && $0 <= operation.firstDate.maximumPlanningDate
+        } ?? true
       guard operation.recurrence != .none || operation.recurrenceEndDate == nil,
         hasValidEndDate
       else {
