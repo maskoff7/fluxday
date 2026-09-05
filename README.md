@@ -2,6 +2,8 @@
 
 **Your money, mapped day by day.** Fluxday is a private, local-first cash-flow planner for macOS. It shows when a future balance becomes tight, which payments caused it and how recurring-operation scenarios change the result.
 
+> `v0.1.0` is the released Tauri implementation. Development of the fully native SwiftUI `v0.2.0` is tracked in [issue #13](https://github.com/maskoff7/fluxday/issues/13) and follows the [native migration plan](docs/native-macos-migration.md). The released application remains supported until native feature and data parity is verified.
+
 ![Fluxday timeline with cash-gap intelligence](docs/screenshots/timeline-gap.png)
 
 ## Highlights
@@ -54,6 +56,7 @@ Production data is stored in `fluxday.sqlite3` under the operating system's appl
 - [Testing](docs/testing.md)
 - [Product backlog](docs/product-backlog.md)
 - [v0.1.0 release notes](docs/release-v0.1.0.md)
+- [Native macOS migration plan](docs/native-macos-migration.md)
 - [Development and contributions](CONTRIBUTING.md)
 
 The original prototype is preserved in `reference/legacy/`. No license has been selected.
