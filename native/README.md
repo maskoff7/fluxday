@@ -41,3 +41,7 @@ The Debug build accepts `--demo` to display deterministic in-memory sample data 
 ![Native financial calendar in English](../docs/screenshots/native-calendar.png)
 
 ![Native recurring series in English](../docs/screenshots/native-recurring.png)
+
+![Native cash flow summary in English](../docs/screenshots/native-summary.png)
+
+![Native scenario comparison in English](../docs/screenshots/native-scenarios.png)

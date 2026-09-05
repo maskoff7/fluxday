@@ -6,6 +6,8 @@ private enum SidebarDestination: Hashable {
   case operations
   case calendar
   case recurring
+  case summary
+  case scenarios
 }
 
 struct ContentView: View {
@@ -26,6 +28,11 @@ struct ContentView: View {
         Label("navigation.recurring", systemImage: "repeat")
           .badge(model.plan.operations.filter { $0.recurrence != .none }.count)
           .tag(SidebarDestination.recurring)
+        Label("navigation.summary", systemImage: "chart.pie")
+          .tag(SidebarDestination.summary)
+        Label("navigation.scenarios", systemImage: "square.stack.3d.up")
+          .badge(model.plan.scenarios.count)
+          .tag(SidebarDestination.scenarios)
       }
       .navigationTitle("app.name")
       .navigationSplitViewColumnWidth(min: 180, ideal: 220)
@@ -50,6 +57,10 @@ struct ContentView: View {
           editAction: editOperation,
           duplicateAction: duplicateOperation
         )
+      case .summary:
+        SummaryView()
+      case .scenarios:
+        ScenariosView()
       }
     }
     .toolbar {

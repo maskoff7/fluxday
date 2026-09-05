@@ -108,7 +108,38 @@ final class AppModel: ObservableObject {
     commit(updated)
   }
 
-  private func commit(_ updated: CashFlowPlan) {
+  func saveScenario(_ scenario: Scenario) {
+    var updated = plan
+    if let index = updated.scenarios.firstIndex(where: { $0.id == scenario.id }) {
+      updated.scenarios[index] = scenario
+    } else {
+      updated.scenarios.append(scenario)
+    }
+    commit(updated, recalculatesForecast: false)
+  }
+
+  func deleteScenario(id: String) {
+    var updated = plan
+    updated.scenarios.removeAll { $0.id == id }
+    commit(updated, recalculatesForecast: false)
+  }
+
+  func updateScenarioOverride(
+    scenarioID: String,
+    operationID: String,
+    override: ScenarioOverride?
+  ) {
+    guard let index = plan.scenarios.firstIndex(where: { $0.id == scenarioID }) else { return }
+    var updated = plan
+    if let override {
+      updated.scenarios[index].overrides[operationID] = override
+    } else {
+      updated.scenarios[index].overrides.removeValue(forKey: operationID)
+    }
+    commit(updated, recalculatesForecast: false)
+  }
+
+  private func commit(_ updated: CashFlowPlan, recalculatesForecast: Bool = true) {
     do {
       try PlanValidator.validate(updated)
     } catch {
@@ -116,7 +147,7 @@ final class AppModel: ObservableObject {
       return
     }
     plan = updated
-    refreshForecast()
+    if recalculatesForecast { refreshForecast() }
     persist(updated)
   }
 
@@ -198,20 +229,37 @@ final class AppModel: ObservableObject {
           updatedAt: timestamp
         )
       }
+      let salary = operation(
+        "salary", "Salary", .income, 185_000_00, 3, recurrence: .monthly, endMonths: 6)
+      let rent = operation(
+        "rent", "Apartment rent", .expense, 78_000_00, 1, recurrence: .monthly, endMonths: 6)
+      let operations = [
+        salary,
+        rent,
+        operation("subscription", "Annual software subscription", .expense, 42_000_00, 14),
+        operation(
+          "project", "Freelance project", .income, 90_000_00, 35, certainty: .expected),
+        operation("tax", "Quarterly tax", .expense, 105_000_00, 72),
+      ]
+      let higherRent = Scenario(
+        id: "higher-rent",
+        name: "Higher rent",
+        overrides: ["rent": ScenarioOverride(amountMinor: Money(minorUnits: 92_000_00))]
+      )
+      let delayedSalary = Scenario(
+        id: "delayed-salary",
+        name: "Salary arrives later",
+        overrides: [
+          "salary": ScenarioOverride(firstDate: try! salary.firstDate.adding(days: 10))
+        ]
+      )
       return CashFlowPlan(
         settings: PlanSettings(
           startBalanceMinor: Money(minorUnits: 65_000_00),
           startDate: today
         ),
-        operations: [
-          operation("salary", "Salary", .income, 185_000_00, 3, recurrence: .monthly, endMonths: 6),
-          operation(
-            "rent", "Apartment rent", .expense, 78_000_00, 1, recurrence: .monthly, endMonths: 6),
-          operation("subscription", "Annual software subscription", .expense, 42_000_00, 14),
-          operation(
-            "project", "Freelance project", .income, 90_000_00, 35, certainty: .expected),
-          operation("tax", "Quarterly tax", .expense, 105_000_00, 72),
-        ]
+        operations: operations,
+        scenarios: [higherRent, delayedSalary]
       )
     }
   #endif

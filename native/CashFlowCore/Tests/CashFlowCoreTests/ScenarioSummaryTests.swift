@@ -30,6 +30,25 @@ final class ScenarioSummaryTests: XCTestCase {
     XCTAssertEqual(ScenarioEngine.apply(scenario, to: [base]), [base])
   }
 
+  func testExcludesARecurringSeriesWithoutMutatingItsBaseState() throws {
+    let base = try operation(
+      id: "rent",
+      firstDate: "2026-01-01",
+      recurrence: .monthly,
+      recurrenceEndDate: "2026-03-01"
+    )
+    let scenario = Scenario(
+      id: "without-rent",
+      name: "Without rent",
+      overrides: ["rent": ScenarioOverride(excluded: true)]
+    )
+
+    let result = ScenarioEngine.apply(scenario, to: [base])
+
+    XCTAssertFalse(result[0].enabled)
+    XCTAssertTrue(base.enabled)
+  }
+
   func testBuildsScenarioComparisonAnalytics() throws {
     let rent = try operation(
       id: "rent",
@@ -71,6 +90,33 @@ final class ScenarioSummaryTests: XCTestCase {
     XCTAssertEqual(summary.expenseMinor.minorUnits, 5_000)
     XCTAssertEqual(summary.groups[0].count, 5)
     XCTAssertEqual(summary.groups[0].totalMinor.minorUnits, 5_000)
+    XCTAssertEqual(summary.groups[0].share, 1)
+  }
+
+  func testFiltersCompositionWithoutChangingPeriodTotals() throws {
+    let income = try operation(
+      id: "salary",
+      type: .income,
+      amountMinor: 20_000,
+      firstDate: "2026-01-02"
+    )
+    let expense = try operation(
+      id: "rent",
+      amountMinor: 5_000,
+      firstDate: "2026-01-03"
+    )
+
+    let summary = try SummaryEngine.build(
+      operations: [income, expense],
+      from: date("2026-01-01"),
+      through: date("2026-01-31"),
+      filter: .expense
+    )
+
+    XCTAssertEqual(summary.incomeMinor.minorUnits, 20_000)
+    XCTAssertEqual(summary.expenseMinor.minorUnits, 5_000)
+    XCTAssertEqual(summary.netMinor.minorUnits, 15_000)
+    XCTAssertEqual(summary.groups.map(\.id), ["rent"])
     XCTAssertEqual(summary.groups[0].share, 1)
   }
 }
