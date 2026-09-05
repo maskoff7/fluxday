@@ -2,6 +2,52 @@ import CashFlowCore
 import XCTest
 
 final class RecurrenceTests: XCTestCase {
+  func testSuggestsTheV01DefaultSeriesEndDates() throws {
+    let firstDate = try CalendarDate("2028-02-29")
+
+    XCTAssertEqual(
+      try RecurrenceEngine.defaultEndDate(from: firstDate, recurrence: .monthly),
+      try CalendarDate("2028-03-29")
+    )
+    XCTAssertEqual(
+      try RecurrenceEngine.defaultEndDate(from: firstDate, recurrence: .yearly),
+      try CalendarDate("2029-02-28")
+    )
+    XCTAssertNil(try RecurrenceEngine.defaultEndDate(from: firstDate, recurrence: .none))
+  }
+
+  func testFindsTheNextAnchoredOccurrenceAndHonorsSeriesState() throws {
+    let monthly = try operation(
+      id: "rent",
+      firstDate: "2025-01-31",
+      recurrence: .monthly,
+      recurrenceEndDate: "2025-05-31"
+    )
+
+    XCTAssertEqual(
+      try RecurrenceEngine.nextOccurrenceDate(
+        for: monthly,
+        onOrAfter: CalendarDate("2025-02-01")
+      ),
+      try CalendarDate("2025-02-28")
+    )
+    XCTAssertNil(
+      try RecurrenceEngine.nextOccurrenceDate(
+        for: monthly,
+        onOrAfter: CalendarDate("2025-06-01")
+      )
+    )
+
+    var disabled = monthly
+    disabled.enabled = false
+    XCTAssertNil(
+      try RecurrenceEngine.nextOccurrenceDate(
+        for: disabled,
+        onOrAfter: CalendarDate("2025-02-01")
+      )
+    )
+  }
+
   func testAnchorsMonthEndWithoutDrift() throws {
     let item = try operation(
       id: "rent",

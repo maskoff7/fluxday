@@ -11,8 +11,20 @@ struct OperationEditorIntent: Identifiable {
   let id = UUID()
   let mode: Mode
   let operation: CashFlowCore.Operation?
+  let preferredDate: CalendarDate?
+  let preferredRecurrence: Recurrence?
 
-  static var create: Self { Self(mode: .create, operation: nil) }
+  static var create: Self {
+    Self(mode: .create, operation: nil, preferredDate: nil, preferredRecurrence: nil)
+  }
+
+  static func create(on date: CalendarDate) -> Self {
+    Self(mode: .create, operation: nil, preferredDate: date, preferredRecurrence: nil)
+  }
+
+  static var recurring: Self {
+    Self(mode: .create, operation: nil, preferredDate: nil, preferredRecurrence: .monthly)
+  }
 }
 
 struct OperationEditor: View {
@@ -26,7 +38,6 @@ struct OperationEditor: View {
   @State private var certainty: Certainty
   @State private var firstDate: Date
   @State private var recurrence: Recurrence
-  @State private var hasEndDate: Bool
   @State private var recurrenceEndDate: Date
   @State private var note: String
   @State private var validationKey: LocalizedStringKey?
@@ -38,17 +49,22 @@ struct OperationEditor: View {
     self.intent = intent
     self.saveAction = saveAction
     let source = intent.operation
-    let start = source?.firstDate.foundationDate ?? Date()
+    let start = source?.firstDate.foundationDate ?? intent.preferredDate?.foundationDate ?? Date()
+    let recurrence = source?.recurrence ?? intent.preferredRecurrence ?? .none
+    let fallbackEnd =
+      (try? RecurrenceEngine.defaultEndDate(
+        from: start.calendarDate,
+        recurrence: recurrence
+      )) ?? nil
     _name = State(initialValue: source?.name ?? "")
     _type = State(initialValue: source?.type ?? .expense)
     _amount = State(initialValue: source?.amountMinor.inputValue ?? "")
     _certainty = State(initialValue: source?.certainty ?? .certain)
     _firstDate = State(initialValue: start)
-    _recurrence = State(initialValue: source?.recurrence ?? .none)
-    _hasEndDate = State(initialValue: source?.recurrenceEndDate != nil)
+    _recurrence = State(initialValue: recurrence)
     _recurrenceEndDate = State(
       initialValue: source?.recurrenceEndDate?.foundationDate
-        ?? Calendar.current.date(byAdding: .month, value: 6, to: start) ?? start
+        ?? fallbackEnd?.foundationDate ?? start
     )
     _note = State(initialValue: source?.note ?? "")
   }
@@ -80,22 +96,27 @@ struct OperationEditor: View {
         }
 
         Section("operation.editor.schedule") {
-          DatePicker("operation.firstDate", selection: $firstDate, displayedComponents: .date)
+          DatePicker(
+            "operation.firstDate",
+            selection: $firstDate,
+            in: ...Date().calendarDate.maximumPlanningDate.foundationDate,
+            displayedComponents: .date
+          )
           Picker("operation.recurrence", selection: $recurrence) {
             ForEach(Recurrence.allCases, id: \.self) { value in
               Text(value.titleKey).tag(value)
             }
           }
           if recurrence != .none {
-            Toggle("operation.endDate.enabled", isOn: $hasEndDate)
-            if hasEndDate {
-              DatePicker(
-                "operation.endDate",
-                selection: $recurrenceEndDate,
-                in: firstDate...firstDate.calendarDate.maximumPlanningDate.foundationDate,
-                displayedComponents: .date
-              )
-            }
+            DatePicker(
+              "operation.endDate",
+              selection: $recurrenceEndDate,
+              in: firstDate...firstDate.calendarDate.maximumPlanningDate.foundationDate,
+              displayedComponents: .date
+            )
+            Text("operation.endDate.help")
+              .font(.caption)
+              .foregroundStyle(.secondary)
           }
         }
 
@@ -122,11 +143,15 @@ struct OperationEditor: View {
       .padding()
     }
     .frame(width: 520, height: 590)
+    .onChange(of: firstDate) { _, newValue in resetRecurrenceEnd(from: newValue) }
+    .onChange(of: recurrence) { _, _ in resetRecurrenceEnd(from: firstDate) }
   }
 
   private var editorTitle: LocalizedStringKey {
     switch intent.mode {
-    case .create: "operation.editor.create"
+    case .create:
+      intent.preferredRecurrence == nil
+        ? "operation.editor.create" : "operation.editor.createRecurring"
     case .edit: "operation.editor.edit"
     case .duplicate: "operation.editor.duplicate"
     }
@@ -159,8 +184,7 @@ struct OperationEditor: View {
       certainty: certainty,
       firstDate: firstDate.calendarDate,
       recurrence: recurrence,
-      recurrenceEndDate: recurrence != .none && hasEndDate
-        ? recurrenceEndDate.calendarDate : nil,
+      recurrenceEndDate: recurrence != .none ? recurrenceEndDate.calendarDate : nil,
       note: cleanNote,
       enabled: preservesIdentity ? source?.enabled ?? true : true,
       createdAt: preservesIdentity ? source?.createdAt ?? now : now,
@@ -172,6 +196,16 @@ struct OperationEditor: View {
 
   private func newIdentifier() -> String {
     "op-\(UUID().uuidString.lowercased())"
+  }
+
+  private func resetRecurrenceEnd(from date: Date) {
+    guard
+      let endDate = try? RecurrenceEngine.defaultEndDate(
+        from: date.calendarDate,
+        recurrence: recurrence
+      )
+    else { return }
+    recurrenceEndDate = endDate.foundationDate
   }
 }
 

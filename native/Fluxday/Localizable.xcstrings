@@ -379,10 +379,112 @@
         "ru" : { "stringUnit" : { "state" : "translated", "value" : "Минимальный баланс" } }
       }
     },
+    "calendar.day.add" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "New Operation" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Новая операция" } }
+      }
+    },
+    "calendar.day.closing" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Closing" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "На конец дня" } }
+      }
+    },
+    "calendar.day.empty" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No operations" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Нет операций" } }
+      }
+    },
+    "calendar.day.empty.message" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "This day has no planned operations." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "На этот день ничего не запланировано." } }
+      }
+    },
+    "calendar.day.expenses" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Expenses" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Расходы" } }
+      }
+    },
+    "calendar.day.eyebrow" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Day details" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Детали дня" } }
+      }
+    },
+    "calendar.day.income" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Income" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Доходы" } }
+      }
+    },
+    "calendar.day.opening" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Opening" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "На начало дня" } }
+      }
+    },
+    "calendar.day.outside" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Outside the forecast" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Вне прогноза" } }
+      }
+    },
+    "calendar.day.outside.message" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Choose a date inside the current forecast." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Выберите дату внутри текущего прогноза." } }
+      }
+    },
+    "calendar.eyebrow" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Financial calendar" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Финансовый календарь" } }
+      }
+    },
+    "calendar.next" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Next Month" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Следующий месяц" } }
+      }
+    },
+    "calendar.previous" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Previous Month" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Предыдущий месяц" } }
+      }
+    },
+    "calendar.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Calendar" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Календарь" } }
+      }
+    },
+    "calendar.today" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Today" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Сегодня" } }
+      }
+    },
+    "navigation.calendar" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Calendar" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Календарь" } }
+      }
+    },
     "navigation.operations" : {
       "localizations" : {
         "en" : { "stringUnit" : { "state" : "translated", "value" : "Operations" } },
         "ru" : { "stringUnit" : { "state" : "translated", "value" : "Операции" } }
+      }
+    },
+    "navigation.recurring" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Recurring" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Повторяющиеся" } }
       }
     },
     "operation.add" : {
@@ -463,6 +565,12 @@
         "ru" : { "stringUnit" : { "state" : "translated", "value" : "Новая операция" } }
       }
     },
+    "operation.editor.createRecurring" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "New Recurring Series" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Новая повторяющаяся серия" } }
+      }
+    },
     "operation.editor.details" : {
       "localizations" : {
         "en" : { "stringUnit" : { "state" : "translated", "value" : "Details" } },
@@ -503,6 +611,12 @@
       "localizations" : {
         "en" : { "stringUnit" : { "state" : "translated", "value" : "End date" } },
         "ru" : { "stringUnit" : { "state" : "translated", "value" : "Дата окончания" } }
+      }
+    },
+    "operation.endDate.help" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "A practical end date is suggested automatically. You can change it." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Подходящая дата предложена автоматически. Её можно изменить." } }
       }
     },
     "operation.endDate.enabled" : {
@@ -665,6 +779,102 @@
       "localizations" : {
         "en" : { "stringUnit" : { "state" : "translated", "value" : "Upcoming operations" } },
         "ru" : { "stringUnit" : { "state" : "translated", "value" : "Ближайшие операции" } }
+      }
+    },
+    "recurring.actions" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Series Actions" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Действия с серией" } }
+      }
+    },
+    "recurring.add" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "New Series" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Новая серия" } }
+      }
+    },
+    "recurring.empty.message" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Create an operation and choose how often it repeats." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Создайте операцию и выберите частоту повторения." } }
+      }
+    },
+    "recurring.empty.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No recurring series" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Нет повторяющихся серий" } }
+      }
+    },
+    "recurring.expenses" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Regular Expenses" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Регулярные расходы" } }
+      }
+    },
+    "recurring.filter.all" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "All" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Все" } }
+      }
+    },
+    "recurring.filter.disabled" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Disabled" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Отключённые" } }
+      }
+    },
+    "recurring.filter.expense" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Expenses" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Расходы" } }
+      }
+    },
+    "recurring.filter.income" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Income" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Доходы" } }
+      }
+    },
+    "recurring.filter.label" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Filter recurring series" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Фильтр повторяющихся серий" } }
+      }
+    },
+    "recurring.finished" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No upcoming occurrences" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Больше не повторяется" } }
+      }
+    },
+    "recurring.income" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Regular Income" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Регулярные доходы" } }
+      }
+    },
+    "recurring.next" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Next:" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Следующая:" } }
+      }
+    },
+    "recurring.search" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Search recurring series" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Поиск повторяющихся серий" } }
+      }
+    },
+    "recurring.search.empty" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No matching series" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Подходящих серий нет" } }
+      }
+    },
+    "recurring.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Recurring Series" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Повторяющиеся серии" } }
       }
     },
     "startingPoint.balance" : {

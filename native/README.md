@@ -37,3 +37,7 @@ The Debug build accepts `--demo` to display deterministic in-memory sample data 
 ![Native operation list in English](../docs/screenshots/native-operations.png)
 
 ![Native operation editor in English](../docs/screenshots/native-operation-editor.png)
+
+![Native financial calendar in English](../docs/screenshots/native-calendar.png)
+
+![Native recurring series in English](../docs/screenshots/native-recurring.png)

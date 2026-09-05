@@ -22,6 +22,8 @@
 		AA1000000000000000000013 /* OperationEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2000000000000000000012 /* OperationEditor.swift */; };
 		AA1000000000000000000014 /* OverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2000000000000000000013 /* OverviewView.swift */; };
 		AA1000000000000000000015 /* OperationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2000000000000000000014 /* OperationsView.swift */; };
+		AA1000000000000000000016 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2000000000000000000015 /* CalendarView.swift */; };
+		AA1000000000000000000017 /* RecurringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2000000000000000000016 /* RecurringView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +41,8 @@
 		AA2000000000000000000012 /* OperationEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationEditor.swift; sourceTree = "<group>"; };
 		AA2000000000000000000013 /* OverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewView.swift; sourceTree = "<group>"; };
 		AA2000000000000000000014 /* OperationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationsView.swift; sourceTree = "<group>"; };
+		AA2000000000000000000015 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		AA2000000000000000000016 /* RecurringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecurringView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +80,8 @@
 				AA2000000000000000000012 /* OperationEditor.swift */,
 				AA2000000000000000000013 /* OverviewView.swift */,
 				AA2000000000000000000014 /* OperationsView.swift */,
+				AA2000000000000000000015 /* CalendarView.swift */,
+				AA2000000000000000000016 /* RecurringView.swift */,
 				AA2000000000000000000005 /* Localizable.xcstrings */,
 				AA2000000000000000000006 /* Assets.xcassets */,
 			);
@@ -180,6 +186,8 @@
 				AA1000000000000000000013 /* OperationEditor.swift in Sources */,
 				AA1000000000000000000014 /* OverviewView.swift in Sources */,
 				AA1000000000000000000015 /* OperationsView.swift in Sources */,
+				AA1000000000000000000016 /* CalendarView.swift in Sources */,
+				AA1000000000000000000017 /* RecurringView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
