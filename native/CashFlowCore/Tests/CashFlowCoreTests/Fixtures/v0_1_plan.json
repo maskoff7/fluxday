@@ -1,0 +1,44 @@
+{
+  "version": 4,
+  "product": "Fluxday",
+  "exportedAt": "2026-01-01T00:00:00.000Z",
+  "schemaVersion": 1,
+  "settings": {
+    "startBalanceMinor": 123456,
+    "startDate": "2026-01-01",
+    "baseCurrency": "RUB",
+    "preferences": {
+      "onboardingComplete": true
+    }
+  },
+  "operations": [
+    {
+      "id": "rent",
+      "name": "Rent",
+      "type": "expense",
+      "amountMinor": 50025,
+      "certainty": "certain",
+      "firstDate": "2026-01-31",
+      "recurrence": "monthly",
+      "recurrenceEndDate": "2026-03-31",
+      "note": "v0.1.0 fixture",
+      "enabled": true,
+      "createdAt": "2026-01-01T00:00:00.000Z",
+      "updatedAt": "2026-01-01T00:00:00.000Z"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "higher-rent",
+      "name": "Higher rent",
+      "overrides": {
+        "rent": {
+          "amountMinor": 70050,
+          "recurrenceEndDate": null,
+          "certainty": "expected",
+          "excluded": false
+        }
+      }
+    }
+  ]
+}

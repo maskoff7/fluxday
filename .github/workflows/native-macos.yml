@@ -17,7 +17,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Check Swift formatting
-        run: swift format lint --recursive --strict native/Fluxday
+        run: |
+          swift format lint --recursive --strict native/Fluxday
+          swift format lint --strict native/CashFlowCore/Package.swift
+          swift format lint --recursive --strict native/CashFlowCore/Sources native/CashFlowCore/Tests
+      - name: Test financial core
+        run: swift test --package-path native/CashFlowCore
       - name: Validate localization catalogs
         run: jq empty native/Fluxday/Localizable.xcstrings native/Fluxday/Assets.xcassets/Contents.json
       - name: Build native application
