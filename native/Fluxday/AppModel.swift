@@ -3,6 +3,10 @@ import Combine
 import FluxdayPersistence
 import Foundation
 
+private enum AppModelTransferError: Error {
+  case persistenceUnavailable
+}
+
 @MainActor
 final class AppModel: ObservableObject {
   @Published private(set) var plan = AppModel.emptyPlan()
@@ -137,6 +141,38 @@ final class AppModel: ObservableObject {
       updated.scenarios[index].overrides.removeValue(forKey: operationID)
     }
     commit(updated, recalculatesForecast: false)
+  }
+
+  func backupData() async throws -> Data {
+    let snapshot = plan
+    return try await Task.detached(priority: .userInitiated) {
+      try PlanDocumentCodec.encode(snapshot)
+    }.value
+  }
+
+  func restoreBackup(from url: URL) async throws {
+    let hasSecurityAccess = url.startAccessingSecurityScopedResource()
+    defer {
+      if hasSecurityAccess { url.stopAccessingSecurityScopedResource() }
+    }
+
+    let restored = try await Task.detached(priority: .userInitiated) {
+      try PlanDocumentCodec.decode(Data(contentsOf: url, options: .mappedIfSafe))
+    }.value
+
+    #if DEBUG
+      if ProcessInfo.processInfo.arguments.contains("--demo") {
+        plan = restored
+        refreshForecast()
+        return
+      }
+    #endif
+
+    guard let store else { throw AppModelTransferError.persistenceUnavailable }
+    await pendingSave?.value
+    try await store.save(restored)
+    plan = restored
+    refreshForecast()
   }
 
   private func commit(_ updated: CashFlowPlan, recalculatesForecast: Bool = true) {

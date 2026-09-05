@@ -23,6 +23,72 @@
         }
       }
     },
+    "backup.create" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Create Backup…" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Создать резервную копию…" } }
+      }
+    },
+    "backup.error.message" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "The file may be invalid, unsupported, or unavailable. Your existing plan was not changed." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Возможно, файл повреждён, не поддерживается или недоступен. Текущий план не был изменён." } }
+      }
+    },
+    "backup.error.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Backup Couldn’t Be Completed" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Не удалось завершить работу с копией" } }
+      }
+    },
+    "backup.help" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Backups include settings, operations, recurring series, certainty, scenarios, and overrides." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "В копию входят настройки, операции, повторяющиеся серии, надёжность, сценарии и их изменения." } }
+      }
+    },
+    "backup.restore" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Restore from Backup…" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Восстановить из копии…" } }
+      }
+    },
+    "backup.restore.complete.message" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Your plan was restored and saved locally." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "План восстановлен и сохранён на этом Mac." } }
+      }
+    },
+    "backup.restore.complete.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Backup Restored" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Копия восстановлена" } }
+      }
+    },
+    "backup.restore.confirm.action" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Choose Backup…" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Выбрать копию…" } }
+      }
+    },
+    "backup.restore.confirm.message" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Your current plan will be replaced only after the selected backup is verified. This cannot be undone." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Текущий план будет заменён только после проверки выбранной копии. Это действие нельзя отменить." } }
+      }
+    },
+    "backup.restore.confirm.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Restore a Backup?" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Восстановить резервную копию?" } }
+      }
+    },
+    "backup.section" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Backup and Transfer" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Резервная копия и перенос" } }
+      }
+    },
     "language.english" : {
       "localizations" : {
         "en" : {
@@ -975,8 +1041,14 @@
     },
     "summary.group.detail" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "%@ occurrences · %@" } },
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "%@ появлений · %@" } }
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Occurrences: %@ · %@" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Операций: %@ · %@" } }
+      }
+    },
+    "summary.range" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%1$@ — %2$@" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "%1$@ — %2$@" } }
       }
     },
     "summary.loading" : {
@@ -1125,8 +1197,8 @@
     },
     "scenarios.chart.accessibility" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Base plan compared with scenario" } },
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Сравнение базового плана со сценарием" } }
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Base plan compared with scenario “%@”." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Сравнение базового плана со сценарием «%@»." } }
       }
     },
     "scenarios.chart.eyebrow" : {
@@ -1215,20 +1287,20 @@
     },
     "scenarios.metric.baseMinimum" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Minimum" } },
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Минимум" } }
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Minimum %@" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Минимум %@" } }
       }
     },
     "scenarios.metric.deficit" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Deficit" } },
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Дефицит" } }
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Deficit %@" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Дефицит %@" } }
       }
     },
     "scenarios.metric.delta" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Change" } },
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Изменение" } }
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Change %@" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Изменение %@" } }
       }
     },
     "scenarios.metric.firstGap" : {

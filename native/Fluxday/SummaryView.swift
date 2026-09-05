@@ -336,7 +336,12 @@ struct SummaryView: View {
   }
 
   private var rangeTitle: String {
-    "\(range.start.formatted(locale: locale)) — \(range.end.formatted(locale: locale))"
+    AppLocalization.format(
+      "summary.range",
+      locale: locale,
+      range.start.formatted(locale: locale),
+      range.end.formatted(locale: locale)
+    )
   }
 
   private var compositionEyebrow: LocalizedStringKey {
@@ -370,13 +375,12 @@ struct SummaryView: View {
   }
 
   private func groupSubtitle(_ group: SummaryGroup) -> String {
-    let format = AppLocalization.string("summary.group.detail", locale: locale)
     let count = group.count.formatted(.number.locale(locale))
     let share = group.share.formatted(
       .percent.precision(.fractionLength(0...1)).locale(locale)
     )
-    return String(
-      format: format,
+    return AppLocalization.format(
+      "summary.group.detail",
       locale: locale,
       count,
       share
