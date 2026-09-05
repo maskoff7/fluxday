@@ -3,6 +3,40 @@ import Foundation
 public enum RecurrenceEngine {
   public static let maximumOccurrencesPerOperation = 50_000
 
+  public static func defaultEndDate(
+    from firstDate: CalendarDate,
+    recurrence: Recurrence
+  ) throws -> CalendarDate? {
+    switch recurrence {
+    case .none:
+      nil
+    case .yearly:
+      try firstDate.adding(years: 1)
+    case .daily, .weekly, .monthly:
+      try firstDate.adding(months: 1)
+    }
+  }
+
+  public static func nextOccurrenceDate(
+    for operation: Operation,
+    onOrAfter date: CalendarDate
+  ) throws -> CalendarDate? {
+    guard operation.enabled else { return nil }
+    if operation.recurrence == .none {
+      return operation.firstDate >= date ? operation.firstDate : nil
+    }
+
+    var index = firstCandidateIndex(for: operation, rangeStart: date)
+    var candidate = try occurrenceDate(for: operation, index: index)
+    while candidate < date {
+      index += 1
+      candidate = try occurrenceDate(for: operation, index: index)
+    }
+
+    if let endDate = operation.recurrenceEndDate, candidate > endDate { return nil }
+    return candidate
+  }
+
   public static func occurrenceDates(
     for operation: Operation,
     from rangeStart: CalendarDate,

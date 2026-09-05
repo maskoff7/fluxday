@@ -4,6 +4,8 @@ import SwiftUI
 private enum SidebarDestination: Hashable {
   case overview
   case operations
+  case calendar
+  case recurring
 }
 
 struct ContentView: View {
@@ -19,6 +21,11 @@ struct ContentView: View {
         Label("navigation.operations", systemImage: "list.bullet.rectangle")
           .badge(model.plan.operations.count)
           .tag(SidebarDestination.operations)
+        Label("navigation.calendar", systemImage: "calendar")
+          .tag(SidebarDestination.calendar)
+        Label("navigation.recurring", systemImage: "repeat")
+          .badge(model.plan.operations.filter { $0.recurrence != .none }.count)
+          .tag(SidebarDestination.recurring)
       }
       .navigationTitle("app.name")
       .navigationSplitViewColumnWidth(min: 180, ideal: 220)
@@ -29,6 +36,17 @@ struct ContentView: View {
       case .operations:
         OperationsView(
           addAction: createOperation,
+          editAction: editOperation,
+          duplicateAction: duplicateOperation
+        )
+      case .calendar:
+        CalendarView(
+          addAction: createOperation(on:),
+          editAction: editOperation
+        )
+      case .recurring:
+        RecurringView(
+          addAction: createRecurringOperation,
           editAction: editOperation,
           duplicateAction: duplicateOperation
         )
@@ -82,10 +100,28 @@ struct ContentView: View {
   }
 
   private func editOperation(_ operation: CashFlowCore.Operation) {
-    editorIntent = OperationEditorIntent(mode: .edit, operation: operation)
+    editorIntent = OperationEditorIntent(
+      mode: .edit,
+      operation: operation,
+      preferredDate: nil,
+      preferredRecurrence: nil
+    )
   }
 
   private func duplicateOperation(_ operation: CashFlowCore.Operation) {
-    editorIntent = OperationEditorIntent(mode: .duplicate, operation: operation)
+    editorIntent = OperationEditorIntent(
+      mode: .duplicate,
+      operation: operation,
+      preferredDate: nil,
+      preferredRecurrence: nil
+    )
+  }
+
+  private func createOperation(on date: CalendarDate) {
+    editorIntent = .create(on: date)
+  }
+
+  private func createRecurringOperation() {
+    editorIntent = .recurring
   }
 }

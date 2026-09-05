@@ -127,6 +127,11 @@ public struct CalendarDate: Hashable, Comparable, Codable, CustomStringConvertib
     try! CalendarDate(year: year, month: month, day: Self.daysInMonth(year: year, month: month))
   }
 
+  public func monthGridDays() throws -> [CalendarDate] {
+    let firstGridDay = try startOfMonth.startOfWeek()
+    return try firstGridDay.eachDay(through: firstGridDay.adding(days: 41))
+  }
+
   public func startOfWeek() throws -> CalendarDate {
     let epoch = try! CalendarDate("1970-01-01")
     let daysFromEpoch = epoch.days(until: self)

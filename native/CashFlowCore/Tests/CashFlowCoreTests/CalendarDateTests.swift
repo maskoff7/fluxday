@@ -2,6 +2,14 @@ import CashFlowCore
 import XCTest
 
 final class CalendarDateTests: XCTestCase {
+  func testBuildsAMondayFirstSixWeekMonthGrid() throws {
+    let days = try CalendarDate("2026-10-18").monthGridDays()
+
+    XCTAssertEqual(days.count, 42)
+    XCTAssertEqual(days.first, try CalendarDate("2026-09-28"))
+    XCTAssertEqual(days.last, try CalendarDate("2026-11-08"))
+  }
+
   func testValidatesGregorianDates() throws {
     XCTAssertEqual(try date("2024-02-29").description, "2024-02-29")
     XCTAssertThrowsError(try date("2025-02-29"))
