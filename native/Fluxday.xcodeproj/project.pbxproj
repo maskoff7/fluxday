@@ -14,6 +14,10 @@
 		AA1000000000000000000005 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = AA2000000000000000000005 /* Localizable.xcstrings */; };
 		AA1000000000000000000006 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA2000000000000000000006 /* Assets.xcassets */; };
 		AA1000000000000000000007 /* AppLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2000000000000000000008 /* AppLocalization.swift */; };
+		AA1000000000000000000008 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2000000000000000000009 /* AppModel.swift */; };
+		AA1000000000000000000009 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2000000000000000000010 /* MigrationView.swift */; };
+		AA1000000000000000000010 /* CashFlowCore in Frameworks */ = {isa = PBXBuildFile; productRef = AA9000000000000000000001 /* CashFlowCore */; };
+		AA1000000000000000000011 /* FluxdayPersistence in Frameworks */ = {isa = PBXBuildFile; productRef = AA9000000000000000000002 /* FluxdayPersistence */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +29,8 @@
 		AA2000000000000000000006 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA2000000000000000000007 /* Fluxday.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fluxday.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA2000000000000000000008 /* AppLocalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLocalization.swift; sourceTree = "<group>"; };
+		AA2000000000000000000009 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		AA2000000000000000000010 /* MigrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +38,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA1000000000000000000010 /* CashFlowCore in Frameworks */,
+				AA1000000000000000000011 /* FluxdayPersistence in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,6 +62,8 @@
 				AA2000000000000000000003 /* AppLanguage.swift */,
 				AA2000000000000000000004 /* SettingsView.swift */,
 				AA2000000000000000000008 /* AppLocalization.swift */,
+				AA2000000000000000000009 /* AppModel.swift */,
+				AA2000000000000000000010 /* MigrationView.swift */,
 				AA2000000000000000000005 /* Localizable.xcstrings */,
 				AA2000000000000000000006 /* Assets.xcassets */,
 			);
@@ -84,6 +94,10 @@
 			dependencies = (
 			);
 			name = Fluxday;
+			packageProductDependencies = (
+				AA9000000000000000000001 /* CashFlowCore */,
+				AA9000000000000000000002 /* FluxdayPersistence */,
+			);
 			productName = Fluxday;
 			productReference = AA2000000000000000000007 /* Fluxday.app */;
 			productType = "com.apple.product-type.application";
@@ -113,6 +127,10 @@
 				Base,
 			);
 			mainGroup = AA4000000000000000000001;
+			packageReferences = (
+				AA8000000000000000000001 /* XCLocalSwiftPackageReference "CashFlowCore" */,
+				AA8000000000000000000002 /* XCLocalSwiftPackageReference "FluxdayPersistence" */,
+			);
 			productRefGroup = AA4000000000000000000003 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -144,6 +162,8 @@
 				AA1000000000000000000003 /* AppLanguage.swift in Sources */,
 				AA1000000000000000000004 /* SettingsView.swift in Sources */,
 				AA1000000000000000000007 /* AppLocalization.swift in Sources */,
+				AA1000000000000000000008 /* AppModel.swift in Sources */,
+				AA1000000000000000000009 /* MigrationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,6 +274,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		AA8000000000000000000001 /* XCLocalSwiftPackageReference "CashFlowCore" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = CashFlowCore;
+		};
+		AA8000000000000000000002 /* XCLocalSwiftPackageReference "FluxdayPersistence" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = FluxdayPersistence;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AA9000000000000000000001 /* CashFlowCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA8000000000000000000001 /* XCLocalSwiftPackageReference "CashFlowCore" */;
+			productName = CashFlowCore;
+		};
+		AA9000000000000000000002 /* FluxdayPersistence */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA8000000000000000000002 /* XCLocalSwiftPackageReference "FluxdayPersistence" */;
+			productName = FluxdayPersistence;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AA0000000000000000000001 /* Project object */;
 }

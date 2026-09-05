@@ -21,8 +21,12 @@ jobs:
           swift format lint --recursive --strict native/Fluxday
           swift format lint --strict native/CashFlowCore/Package.swift
           swift format lint --recursive --strict native/CashFlowCore/Sources native/CashFlowCore/Tests
+          swift format lint --strict native/FluxdayPersistence/Package.swift
+          swift format lint --recursive --strict native/FluxdayPersistence/Sources native/FluxdayPersistence/Tests
       - name: Test financial core
         run: swift test --package-path native/CashFlowCore
+      - name: Test persistence and migration
+        run: swift test --package-path native/FluxdayPersistence
       - name: Validate localization catalogs
         run: jq empty native/Fluxday/Localizable.xcstrings native/Fluxday/Assets.xcassets/Contents.json
       - name: Build native application
