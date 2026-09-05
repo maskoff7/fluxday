@@ -1,0 +1,31 @@
+name: Native macOS
+
+on:
+  pull_request:
+    paths:
+      - "native/**"
+      - ".github/workflows/native-macos.yml"
+  push:
+    branches: [main]
+    paths:
+      - "native/**"
+      - ".github/workflows/native-macos.yml"
+
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check Swift formatting
+        run: swift format lint --recursive --strict native/Fluxday
+      - name: Validate localization catalogs
+        run: jq empty native/Fluxday/Localizable.xcstrings native/Fluxday/Assets.xcassets/Contents.json
+      - name: Build native application
+        run: |
+          xcodebuild \
+            -project native/Fluxday.xcodeproj \
+            -scheme Fluxday \
+            -configuration Debug \
+            -derivedDataPath native/.build/DerivedData \
+            CODE_SIGNING_ALLOWED=NO \
+            build

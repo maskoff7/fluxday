@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Native macOS build output and per-user Xcode state
+native/.build/
+native/**/xcuserdata/
+native/**/*.xcuserstate

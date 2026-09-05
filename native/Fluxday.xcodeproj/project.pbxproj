@@ -1,0 +1,259 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AA1000000000000000000001 /* FluxdayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2000000000000000000001 /* FluxdayApp.swift */; };
+		AA1000000000000000000002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2000000000000000000002 /* ContentView.swift */; };
+		AA1000000000000000000003 /* AppLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2000000000000000000003 /* AppLanguage.swift */; };
+		AA1000000000000000000004 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2000000000000000000004 /* SettingsView.swift */; };
+		AA1000000000000000000005 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = AA2000000000000000000005 /* Localizable.xcstrings */; };
+		AA1000000000000000000006 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA2000000000000000000006 /* Assets.xcassets */; };
+		AA1000000000000000000007 /* AppLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2000000000000000000008 /* AppLocalization.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AA2000000000000000000001 /* FluxdayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FluxdayApp.swift; sourceTree = "<group>"; };
+		AA2000000000000000000002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		AA2000000000000000000003 /* AppLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguage.swift; sourceTree = "<group>"; };
+		AA2000000000000000000004 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		AA2000000000000000000005 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		AA2000000000000000000006 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AA2000000000000000000007 /* Fluxday.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fluxday.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA2000000000000000000008 /* AppLocalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLocalization.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AA3000000000000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AA4000000000000000000001 = {
+			isa = PBXGroup;
+			children = (
+				AA4000000000000000000002 /* Fluxday */,
+				AA4000000000000000000003 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AA4000000000000000000002 /* Fluxday */ = {
+			isa = PBXGroup;
+			children = (
+				AA2000000000000000000001 /* FluxdayApp.swift */,
+				AA2000000000000000000002 /* ContentView.swift */,
+				AA2000000000000000000003 /* AppLanguage.swift */,
+				AA2000000000000000000004 /* SettingsView.swift */,
+				AA2000000000000000000008 /* AppLocalization.swift */,
+				AA2000000000000000000005 /* Localizable.xcstrings */,
+				AA2000000000000000000006 /* Assets.xcassets */,
+			);
+			path = Fluxday;
+			sourceTree = "<group>";
+		};
+		AA4000000000000000000003 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AA2000000000000000000007 /* Fluxday.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AA0000000000000000000002 /* Fluxday */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA7000000000000000000002 /* Build configuration list for PBXNativeTarget "Fluxday" */;
+			buildPhases = (
+				AA3000000000000000000002 /* Sources */,
+				AA3000000000000000000001 /* Frameworks */,
+				AA3000000000000000000003 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Fluxday;
+			productName = Fluxday;
+			productReference = AA2000000000000000000007 /* Fluxday.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AA0000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2630;
+				LastUpgradeCheck = 2630;
+				TargetAttributes = {
+					AA0000000000000000000002 = {
+						CreatedOnToolsVersion = 26.3;
+					};
+				};
+			};
+			buildConfigurationList = AA7000000000000000000001 /* Build configuration list for PBXProject "Fluxday" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				ru,
+				Base,
+			);
+			mainGroup = AA4000000000000000000001;
+			productRefGroup = AA4000000000000000000003 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AA0000000000000000000002 /* Fluxday */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AA3000000000000000000003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA1000000000000000000005 /* Localizable.xcstrings in Resources */,
+				AA1000000000000000000006 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AA3000000000000000000002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA1000000000000000000001 /* FluxdayApp.swift in Sources */,
+				AA1000000000000000000002 /* ContentView.swift in Sources */,
+				AA1000000000000000000003 /* AppLanguage.swift in Sources */,
+				AA1000000000000000000004 /* SettingsView.swift in Sources */,
+				AA1000000000000000000007 /* AppLocalization.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		AA6000000000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AA6000000000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		AA6000000000000000000003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Fluxday;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 0.2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.fluxday.desktop;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		AA6000000000000000000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Fluxday;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 0.2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.fluxday.desktop;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AA7000000000000000000001 /* Build configuration list for PBXProject "Fluxday" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA6000000000000000000001 /* Debug */,
+				AA6000000000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA7000000000000000000002 /* Build configuration list for PBXNativeTarget "Fluxday" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA6000000000000000000003 /* Debug */,
+				AA6000000000000000000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AA0000000000000000000001 /* Project object */;
+}
