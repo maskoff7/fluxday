@@ -18,6 +18,10 @@
 		AA1000000000000000000009 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2000000000000000000010 /* MigrationView.swift */; };
 		AA1000000000000000000010 /* CashFlowCore in Frameworks */ = {isa = PBXBuildFile; productRef = AA9000000000000000000001 /* CashFlowCore */; };
 		AA1000000000000000000011 /* FluxdayPersistence in Frameworks */ = {isa = PBXBuildFile; productRef = AA9000000000000000000002 /* FluxdayPersistence */; };
+		AA1000000000000000000012 /* PlannerPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2000000000000000000011 /* PlannerPresentation.swift */; };
+		AA1000000000000000000013 /* OperationEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2000000000000000000012 /* OperationEditor.swift */; };
+		AA1000000000000000000014 /* OverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2000000000000000000013 /* OverviewView.swift */; };
+		AA1000000000000000000015 /* OperationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2000000000000000000014 /* OperationsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +35,10 @@
 		AA2000000000000000000008 /* AppLocalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLocalization.swift; sourceTree = "<group>"; };
 		AA2000000000000000000009 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		AA2000000000000000000010 /* MigrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationView.swift; sourceTree = "<group>"; };
+		AA2000000000000000000011 /* PlannerPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannerPresentation.swift; sourceTree = "<group>"; };
+		AA2000000000000000000012 /* OperationEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationEditor.swift; sourceTree = "<group>"; };
+		AA2000000000000000000013 /* OverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewView.swift; sourceTree = "<group>"; };
+		AA2000000000000000000014 /* OperationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +72,10 @@
 				AA2000000000000000000008 /* AppLocalization.swift */,
 				AA2000000000000000000009 /* AppModel.swift */,
 				AA2000000000000000000010 /* MigrationView.swift */,
+				AA2000000000000000000011 /* PlannerPresentation.swift */,
+				AA2000000000000000000012 /* OperationEditor.swift */,
+				AA2000000000000000000013 /* OverviewView.swift */,
+				AA2000000000000000000014 /* OperationsView.swift */,
 				AA2000000000000000000005 /* Localizable.xcstrings */,
 				AA2000000000000000000006 /* Assets.xcassets */,
 			);
@@ -164,6 +176,10 @@
 				AA1000000000000000000007 /* AppLocalization.swift in Sources */,
 				AA1000000000000000000008 /* AppModel.swift in Sources */,
 				AA1000000000000000000009 /* MigrationView.swift in Sources */,
+				AA1000000000000000000012 /* PlannerPresentation.swift in Sources */,
+				AA1000000000000000000013 /* OperationEditor.swift in Sources */,
+				AA1000000000000000000014 /* OverviewView.swift in Sources */,
+				AA1000000000000000000015 /* OperationsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

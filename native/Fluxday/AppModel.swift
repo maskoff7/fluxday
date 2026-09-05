@@ -6,19 +6,33 @@ import Foundation
 @MainActor
 final class AppModel: ObservableObject {
   @Published private(set) var plan = AppModel.emptyPlan()
+  @Published private(set) var forecast: Forecast?
   @Published var migrationPreview: LegacyMigrationPreview?
   @Published private(set) var isLoading = false
   @Published private(set) var isMigrating = false
+  @Published private(set) var isCalculating = false
   @Published var showsPersistenceError = false
+  @Published var showsCalculationError = false
 
   private var store: PlanStore?
   private var hasStarted = false
+  private var forecastRevision = 0
+  private var forecastTask: Task<Void, Never>?
+  private var pendingSave: Task<Void, Never>?
 
   func start() async {
     guard !hasStarted else { return }
     hasStarted = true
     isLoading = true
     defer { isLoading = false }
+
+    #if DEBUG
+      if ProcessInfo.processInfo.arguments.contains("--demo") {
+        plan = Self.demoPlan()
+        refreshForecast()
+        return
+      }
+    #endif
 
     do {
       let databaseURL = try StorageLocations.nativeDatabaseURL()
@@ -29,7 +43,9 @@ final class AppModel: ObservableObject {
 
       if let storedPlan = try await store.load() {
         plan = storedPlan
+        refreshForecast()
       } else {
+        refreshForecast()
         migrationPreview = try await Task.detached(priority: .userInitiated) {
           try LegacyV01Migration.detect()
         }.value
@@ -48,6 +64,7 @@ final class AppModel: ObservableObject {
       try await store.importLegacy(migrationPreview)
       plan = migrationPreview.plan
       self.migrationPreview = nil
+      refreshForecast()
     } catch {
       showsPersistenceError = true
     }
@@ -57,19 +74,155 @@ final class AppModel: ObservableObject {
     migrationPreview = nil
   }
 
+  func saveOperation(_ operation: CashFlowCore.Operation) {
+    var updated = plan
+    if let index = updated.operations.firstIndex(where: { $0.id == operation.id }) {
+      updated.operations[index] = operation
+    } else {
+      updated.operations.append(operation)
+    }
+    commit(updated)
+  }
+
+  func deleteOperation(_ operation: CashFlowCore.Operation) {
+    var updated = plan
+    updated.operations.removeAll { $0.id == operation.id }
+    for index in updated.scenarios.indices {
+      updated.scenarios[index].overrides.removeValue(forKey: operation.id)
+    }
+    commit(updated)
+  }
+
+  func toggleOperation(_ operation: CashFlowCore.Operation) {
+    guard let index = plan.operations.firstIndex(where: { $0.id == operation.id }) else { return }
+    var updated = plan
+    updated.operations[index].enabled.toggle()
+    updated.operations[index].updatedAt = ISO8601DateFormatter().string(from: Date())
+    commit(updated)
+  }
+
+  func updateStartingPoint(balance: Money, date: CalendarDate) {
+    var updated = plan
+    updated.settings.startBalanceMinor = balance
+    updated.settings.startDate = date
+    commit(updated)
+  }
+
+  private func commit(_ updated: CashFlowPlan) {
+    do {
+      try PlanValidator.validate(updated)
+    } catch {
+      showsPersistenceError = true
+      return
+    }
+    plan = updated
+    refreshForecast()
+    persist(updated)
+  }
+
+  private func persist(_ snapshot: CashFlowPlan) {
+    guard let store else { return }
+    let previousSave = pendingSave
+    pendingSave = Task { [weak self] in
+      await previousSave?.value
+      do {
+        try await store.save(snapshot)
+      } catch {
+        self?.showsPersistenceError = true
+      }
+    }
+  }
+
+  private func refreshForecast() {
+    forecastRevision += 1
+    let revision = forecastRevision
+    let snapshot = plan
+    forecastTask?.cancel()
+    isCalculating = true
+    forecastTask = Task { [weak self] in
+      let result = await Task.detached(priority: .userInitiated) {
+        Result {
+          try ForecastEngine.build(
+            startingBalance: snapshot.settings.startBalanceMinor,
+            startDate: snapshot.settings.startDate,
+            operations: snapshot.operations
+          )
+        }
+      }.value
+      guard let self, revision == forecastRevision, !Task.isCancelled else { return }
+      isCalculating = false
+      switch result {
+      case .success(let value):
+        forecast = value
+      case .failure:
+        forecast = nil
+        showsCalculationError = true
+      }
+    }
+  }
+
   private static func emptyPlan() -> CashFlowPlan {
+    CashFlowPlan(
+      settings: PlanSettings(
+        startBalanceMinor: .zero,
+        startDate: today()
+      )
+    )
+  }
+
+  #if DEBUG
+    private static func demoPlan() -> CashFlowPlan {
+      let today = today()
+      let timestamp = ISO8601DateFormatter().string(from: Date())
+      func operation(
+        _ id: String,
+        _ name: String,
+        _ type: OperationType,
+        _ amount: Int64,
+        _ days: Int,
+        recurrence: Recurrence = .none,
+        endMonths: Int? = nil,
+        certainty: Certainty = .certain
+      ) -> CashFlowCore.Operation {
+        let firstDate = try! today.adding(days: days)
+        return CashFlowCore.Operation(
+          id: id,
+          name: name,
+          type: type,
+          amountMinor: Money(minorUnits: amount),
+          certainty: certainty,
+          firstDate: firstDate,
+          recurrence: recurrence,
+          recurrenceEndDate: endMonths.map { try! firstDate.adding(months: $0) },
+          createdAt: timestamp,
+          updatedAt: timestamp
+        )
+      }
+      return CashFlowPlan(
+        settings: PlanSettings(
+          startBalanceMinor: Money(minorUnits: 65_000_00),
+          startDate: today
+        ),
+        operations: [
+          operation("salary", "Salary", .income, 185_000_00, 3, recurrence: .monthly, endMonths: 6),
+          operation(
+            "rent", "Apartment rent", .expense, 78_000_00, 1, recurrence: .monthly, endMonths: 6),
+          operation("subscription", "Annual software subscription", .expense, 42_000_00, 14),
+          operation(
+            "project", "Freelance project", .income, 90_000_00, 35, certainty: .expected),
+          operation("tax", "Quarterly tax", .expense, 105_000_00, 72),
+        ]
+      )
+    }
+  #endif
+
+  private static func today() -> CalendarDate {
     let components = Calendar.autoupdatingCurrent.dateComponents(
       [.year, .month, .day], from: Date())
-    let today = try? CalendarDate(
+    return try! CalendarDate(
       year: components.year ?? 2_000,
       month: components.month ?? 1,
       day: components.day ?? 1
-    )
-    return CashFlowPlan(
-      settings: PlanSettings(
-        startBalanceMinor: .zero,
-        startDate: today ?? (try! CalendarDate("2000-01-01"))
-      )
     )
   }
 }

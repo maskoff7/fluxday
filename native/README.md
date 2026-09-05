@@ -28,6 +28,12 @@ swift test --package-path native/CashFlowCore
 swift test --package-path native/FluxdayPersistence
 ```
 
-## Bootstrap preview
+## Visual QA
 
-![Native Fluxday application shell in English](../docs/screenshots/native-bootstrap.png)
+The Debug build accepts `--demo` to display deterministic in-memory sample data without opening or writing either production database. This is only used for screenshots and interaction checks.
+
+![Native Fluxday planner in English](../docs/screenshots/native-planner.png)
+
+![Native operation list in English](../docs/screenshots/native-operations.png)
+
+![Native operation editor in English](../docs/screenshots/native-operation-editor.png)
