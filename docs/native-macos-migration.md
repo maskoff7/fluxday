@@ -1,6 +1,6 @@
 # Native macOS migration plan
 
-Fluxday v0.1.0 remains the released Tauri reference until the native application reaches verified feature and data parity. Native work lives beside it under `native/`; the web/Tauri production tree is removed only in the final v0.2.0 release pull request.
+Fluxday v0.2.0 completed the migration from the released Tauri prototype to a fully native macOS application. The production implementation lives under `native/`; v0.1.0 remains available through its immutable tag, GitHub Release, Git history, and `reference/legacy/tauri-v0.1.0/` archive.
 
 ## Compatibility contract
 
@@ -42,7 +42,7 @@ The application uses `NavigationSplitView`, native toolbars, sheets, Settings, m
 5. Add the financial calendar and recurring-series management.
 6. Add summaries, drill-down charts and Base vs Scenario comparison.
 7. Complete localization, native commands, undo, accessibility, resize/performance QA and English screenshots.
-8. Verify parity, archive the Tauri source under `reference/legacy/tauri-v0.1.0/`, switch production CI/builds to native and publish v0.2.0.
+8. Verify parity, archive the Tauri source under `reference/legacy/tauri-v0.1.0/`, switch production CI/builds to native and publish v0.2.0. Completed for v0.2.0.
 
 ## Release gates
 
