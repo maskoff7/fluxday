@@ -188,6 +188,7 @@ private struct MetricCard: View {
     .padding(14)
     .frame(maxWidth: .infinity, minHeight: 82, alignment: .leading)
     .background(.quaternary.opacity(0.6), in: .rect(cornerRadius: 12))
+    .accessibilityElement(children: .combine)
   }
 }
 
@@ -299,6 +300,8 @@ private struct BalanceChart: View {
           }
         }
         .frame(minHeight: 260)
+        .accessibilityLabel("chart.balance.title")
+        .accessibilityValue(accessibilitySummary)
       }
       .padding(8)
     }
@@ -314,6 +317,18 @@ private struct BalanceChart: View {
 
   private var stressAxisTitle: String {
     AppLocalization.string("chart.axis.stress", locale: locale)
+  }
+
+  private var accessibilitySummary: String {
+    AppLocalization.format(
+      "chart.balance.accessibility",
+      locale: locale,
+      forecast.startDate.formatted(locale: locale),
+      forecast.endDate.formatted(locale: locale),
+      forecast.endingBalanceMinor.formatted(locale: locale),
+      forecast.minimumBalanceMinor.formatted(locale: locale),
+      forecast.minimumBalanceDate.formatted(locale: locale)
+    )
   }
 }
 
@@ -351,6 +366,7 @@ private struct CashGapRow: View {
     }
     .padding(14)
     .background(.red.opacity(0.08), in: .rect(cornerRadius: 12))
+    .accessibilityElement(children: .combine)
   }
 }
 
@@ -381,5 +397,6 @@ private struct OccurrenceRow: View {
       .foregroundStyle(occurrence.type == .income ? .green : .primary)
     }
     .padding(.vertical, 9)
+    .accessibilityElement(children: .combine)
   }
 }

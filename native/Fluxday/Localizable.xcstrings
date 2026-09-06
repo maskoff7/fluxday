@@ -137,6 +137,12 @@
         }
       }
     },
+    "menu.navigate" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Navigate" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Навигация" } }
+      }
+    },
     "navigation.overview" : {
       "localizations" : {
         "en" : {
@@ -383,6 +389,12 @@
       "localizations" : {
         "en" : { "stringUnit" : { "state" : "translated", "value" : "Hover or drag to inspect any day" } },
         "ru" : { "stringUnit" : { "state" : "translated", "value" : "Наведите курсор или проведите по графику, чтобы увидеть день" } }
+      }
+    },
+    "chart.balance.accessibility" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Forecast from %1$@ through %2$@. Ending balance %3$@. Minimum balance %4$@ on %5$@." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Прогноз с %1$@ по %2$@. Остаток в конце: %3$@. Минимальный остаток: %4$@, дата: %5$@." } }
       }
     },
     "chart.balance.title" : {
@@ -1545,6 +1557,54 @@
             "value" : "Настройки"
           }
         }
+      }
+    },
+    "undo.operation.add" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add Operation" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Добавление операции" } }
+      }
+    },
+    "undo.operation.delete" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Delete Operation" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Удаление операции" } }
+      }
+    },
+    "undo.operation.edit" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Edit Operation" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Изменение операции" } }
+      }
+    },
+    "undo.operation.toggle" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Change Operation Status" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Изменение статуса операции" } }
+      }
+    },
+    "undo.scenario.add" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add Scenario" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Добавление сценария" } }
+      }
+    },
+    "undo.scenario.delete" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Delete Scenario" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Удаление сценария" } }
+      }
+    },
+    "undo.scenario.edit" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Edit Scenario" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Изменение сценария" } }
+      }
+    },
+    "undo.startingPoint" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Change Starting Point" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Изменение начальной точки" } }
       }
     }
   },

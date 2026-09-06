@@ -1,7 +1,7 @@
 import CashFlowCore
 import SwiftUI
 
-private enum SidebarDestination: Hashable {
+enum SidebarDestination: Hashable {
   case overview
   case operations
   case calendar
@@ -10,8 +10,29 @@ private enum SidebarDestination: Hashable {
   case scenarios
 }
 
+private struct NewOperationFocusedValueKey: FocusedValueKey {
+  typealias Value = () -> Void
+}
+
+private struct NavigationFocusedValueKey: FocusedValueKey {
+  typealias Value = (SidebarDestination) -> Void
+}
+
+extension FocusedValues {
+  var newOperationAction: (() -> Void)? {
+    get { self[NewOperationFocusedValueKey.self] }
+    set { self[NewOperationFocusedValueKey.self] = newValue }
+  }
+
+  var navigationAction: ((SidebarDestination) -> Void)? {
+    get { self[NavigationFocusedValueKey.self] }
+    set { self[NavigationFocusedValueKey.self] = newValue }
+  }
+}
+
 struct ContentView: View {
   @EnvironmentObject private var model: AppModel
+  @Environment(\.undoManager) private var undoManager
   @State private var selection: SidebarDestination? = .overview
   @State private var editorIntent: OperationEditorIntent?
 
@@ -103,6 +124,9 @@ struct ContentView: View {
     } message: {
       Text("calculation.error.message")
     }
+    .focusedSceneValue(\.newOperationAction, createOperation)
+    .focusedSceneValue(\.navigationAction) { selection = $0 }
+    .onAppear { model.configureUndoManager(undoManager) }
     .frame(minWidth: 720, minHeight: 520)
   }
 
@@ -134,5 +158,43 @@ struct ContentView: View {
 
   private func createRecurringOperation() {
     editorIntent = .recurring
+  }
+}
+
+struct FluxdayCommands: Commands {
+  let locale: Locale
+
+  @FocusedValue(\.newOperationAction) private var newOperationAction
+  @FocusedValue(\.navigationAction) private var navigationAction
+
+  var body: some Commands {
+    CommandGroup(replacing: .newItem) {
+      Button(AppLocalization.string("operation.add", locale: locale)) {
+        newOperationAction?()
+      }
+      .keyboardShortcut("n", modifiers: .command)
+      .disabled(newOperationAction == nil)
+    }
+
+    CommandMenu(AppLocalization.string("menu.navigate", locale: locale)) {
+      navigationButton("navigation.overview", destination: .overview, shortcut: "1")
+      navigationButton("navigation.operations", destination: .operations, shortcut: "2")
+      navigationButton("navigation.calendar", destination: .calendar, shortcut: "3")
+      navigationButton("navigation.recurring", destination: .recurring, shortcut: "4")
+      navigationButton("navigation.summary", destination: .summary, shortcut: "5")
+      navigationButton("navigation.scenarios", destination: .scenarios, shortcut: "6")
+    }
+  }
+
+  private func navigationButton(
+    _ titleKey: String,
+    destination: SidebarDestination,
+    shortcut: KeyEquivalent
+  ) -> some View {
+    Button(AppLocalization.string(titleKey, locale: locale)) {
+      navigationAction?(destination)
+    }
+    .keyboardShortcut(shortcut, modifiers: .command)
+    .disabled(navigationAction == nil)
   }
 }

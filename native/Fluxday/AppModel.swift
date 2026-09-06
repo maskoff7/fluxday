@@ -23,6 +23,11 @@ final class AppModel: ObservableObject {
   private var forecastRevision = 0
   private var forecastTask: Task<Void, Never>?
   private var pendingSave: Task<Void, Never>?
+  private weak var undoManager: UndoManager?
+
+  func configureUndoManager(_ undoManager: UndoManager?) {
+    self.undoManager = undoManager
+  }
 
   func start() async {
     guard !hasStarted else { return }
@@ -31,8 +36,9 @@ final class AppModel: ObservableObject {
     defer { isLoading = false }
 
     #if DEBUG
-      if ProcessInfo.processInfo.arguments.contains("--demo") {
-        plan = Self.demoPlan()
+      let arguments = ProcessInfo.processInfo.arguments
+      if arguments.contains("--demo") || arguments.contains("--demo-extremes") {
+        plan = Self.demoPlan(extremes: arguments.contains("--demo-extremes"))
         refreshForecast()
         return
       }
@@ -47,6 +53,7 @@ final class AppModel: ObservableObject {
 
       if let storedPlan = try await store.load() {
         plan = storedPlan
+        undoManager?.removeAllActions()
         refreshForecast()
       } else {
         refreshForecast()
@@ -67,6 +74,7 @@ final class AppModel: ObservableObject {
     do {
       try await store.importLegacy(migrationPreview)
       plan = migrationPreview.plan
+      undoManager?.removeAllActions()
       self.migrationPreview = nil
       refreshForecast()
     } catch {
@@ -80,12 +88,14 @@ final class AppModel: ObservableObject {
 
   func saveOperation(_ operation: CashFlowCore.Operation) {
     var updated = plan
-    if let index = updated.operations.firstIndex(where: { $0.id == operation.id }) {
+    let existingIndex = updated.operations.firstIndex(where: { $0.id == operation.id })
+    if let index = existingIndex {
       updated.operations[index] = operation
     } else {
       updated.operations.append(operation)
     }
-    commit(updated)
+    commit(
+      updated, undoActionKey: existingIndex == nil ? "undo.operation.add" : "undo.operation.edit")
   }
 
   func deleteOperation(_ operation: CashFlowCore.Operation) {
@@ -94,7 +104,7 @@ final class AppModel: ObservableObject {
     for index in updated.scenarios.indices {
       updated.scenarios[index].overrides.removeValue(forKey: operation.id)
     }
-    commit(updated)
+    commit(updated, undoActionKey: "undo.operation.delete")
   }
 
   func toggleOperation(_ operation: CashFlowCore.Operation) {
@@ -102,30 +112,35 @@ final class AppModel: ObservableObject {
     var updated = plan
     updated.operations[index].enabled.toggle()
     updated.operations[index].updatedAt = ISO8601DateFormatter().string(from: Date())
-    commit(updated)
+    commit(updated, undoActionKey: "undo.operation.toggle")
   }
 
   func updateStartingPoint(balance: Money, date: CalendarDate) {
     var updated = plan
     updated.settings.startBalanceMinor = balance
     updated.settings.startDate = date
-    commit(updated)
+    commit(updated, undoActionKey: "undo.startingPoint")
   }
 
   func saveScenario(_ scenario: Scenario) {
     var updated = plan
-    if let index = updated.scenarios.firstIndex(where: { $0.id == scenario.id }) {
+    let existingIndex = updated.scenarios.firstIndex(where: { $0.id == scenario.id })
+    if let index = existingIndex {
       updated.scenarios[index] = scenario
     } else {
       updated.scenarios.append(scenario)
     }
-    commit(updated, recalculatesForecast: false)
+    commit(
+      updated,
+      recalculatesForecast: false,
+      undoActionKey: existingIndex == nil ? "undo.scenario.add" : "undo.scenario.edit"
+    )
   }
 
   func deleteScenario(id: String) {
     var updated = plan
     updated.scenarios.removeAll { $0.id == id }
-    commit(updated, recalculatesForecast: false)
+    commit(updated, recalculatesForecast: false, undoActionKey: "undo.scenario.delete")
   }
 
   func updateScenarioOverride(
@@ -140,7 +155,7 @@ final class AppModel: ObservableObject {
     } else {
       updated.scenarios[index].overrides.removeValue(forKey: operationID)
     }
-    commit(updated, recalculatesForecast: false)
+    commit(updated, recalculatesForecast: false, undoActionKey: "undo.scenario.edit")
   }
 
   func backupData() async throws -> Data {
@@ -161,8 +176,11 @@ final class AppModel: ObservableObject {
     }.value
 
     #if DEBUG
-      if ProcessInfo.processInfo.arguments.contains("--demo") {
+      if ProcessInfo.processInfo.arguments.contains("--demo")
+        || ProcessInfo.processInfo.arguments.contains("--demo-extremes")
+      {
         plan = restored
+        undoManager?.removeAllActions()
         refreshForecast()
         return
       }
@@ -172,19 +190,56 @@ final class AppModel: ObservableObject {
     await pendingSave?.value
     try await store.save(restored)
     plan = restored
+    undoManager?.removeAllActions()
     refreshForecast()
   }
 
-  private func commit(_ updated: CashFlowPlan, recalculatesForecast: Bool = true) {
+  private func commit(
+    _ updated: CashFlowPlan,
+    recalculatesForecast: Bool = true,
+    undoActionKey: String
+  ) {
     do {
       try PlanValidator.validate(updated)
     } catch {
       showsPersistenceError = true
       return
     }
+    apply(
+      updated,
+      replacing: plan,
+      recalculatesForecast: recalculatesForecast,
+      undoActionKey: undoActionKey
+    )
+  }
+
+  private func apply(
+    _ updated: CashFlowPlan,
+    replacing previous: CashFlowPlan,
+    recalculatesForecast: Bool,
+    undoActionKey: String
+  ) {
+    guard updated != previous else { return }
     plan = updated
     if recalculatesForecast { refreshForecast() }
     persist(updated)
+    undoManager?.registerUndo(withTarget: self) { target in
+      MainActor.assumeIsolated {
+        target.apply(
+          previous,
+          replacing: updated,
+          recalculatesForecast: recalculatesForecast,
+          undoActionKey: undoActionKey
+        )
+      }
+    }
+    undoManager?.setActionName(localizedUndoAction(undoActionKey))
+  }
+
+  private func localizedUndoAction(_ key: String) -> String {
+    let identifier = UserDefaults.standard.string(forKey: AppLanguage.storageKey)
+    let locale = AppLanguage(rawValue: identifier ?? "")?.locale ?? .autoupdatingCurrent
+    return AppLocalization.string(key, locale: locale)
   }
 
   private func persist(_ snapshot: CashFlowPlan) {
@@ -238,7 +293,7 @@ final class AppModel: ObservableObject {
   }
 
   #if DEBUG
-    private static func demoPlan() -> CashFlowPlan {
+    private static func demoPlan(extremes: Bool = false) -> CashFlowPlan {
       let today = today()
       let timestamp = ISO8601DateFormatter().string(from: Date())
       func operation(
@@ -266,9 +321,24 @@ final class AppModel: ObservableObject {
         )
       }
       let salary = operation(
-        "salary", "Salary", .income, 185_000_00, 3, recurrence: .monthly, endMonths: 6)
+        "salary",
+        extremes
+          ? "International consulting contract with an unusually long client name" : "Salary",
+        .income,
+        extremes ? 9_876_543_21 : 185_000_00,
+        3,
+        recurrence: .monthly,
+        endMonths: 6
+      )
       let rent = operation(
-        "rent", "Apartment rent", .expense, 78_000_00, 1, recurrence: .monthly, endMonths: 6)
+        "rent",
+        extremes ? "Apartment rent and property management services" : "Apartment rent",
+        .expense,
+        extremes ? 9_999_999_99 : 78_000_00,
+        1,
+        recurrence: .monthly,
+        endMonths: 6
+      )
       let operations = [
         salary,
         rent,
@@ -291,7 +361,7 @@ final class AppModel: ObservableObject {
       )
       return CashFlowPlan(
         settings: PlanSettings(
-          startBalanceMinor: Money(minorUnits: 65_000_00),
+          startBalanceMinor: Money(minorUnits: extremes ? 250_000_00 : 65_000_00),
           startDate: today
         ),
         operations: operations,
