@@ -26,6 +26,7 @@
 		AA1000000000000000000017 /* RecurringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2000000000000000000016 /* RecurringView.swift */; };
 		AA1000000000000000000018 /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2000000000000000000017 /* SummaryView.swift */; };
 		AA1000000000000000000019 /* ScenariosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2000000000000000000018 /* ScenariosView.swift */; };
+		AA1000000000000000000020 /* Fluxday.icns in Resources */ = {isa = PBXBuildFile; fileRef = AA2000000000000000000019 /* Fluxday.icns */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,8 @@
 		AA2000000000000000000016 /* RecurringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecurringView.swift; sourceTree = "<group>"; };
 		AA2000000000000000000017 /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
 		AA2000000000000000000018 /* ScenariosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenariosView.swift; sourceTree = "<group>"; };
+		AA2000000000000000000019 /* Fluxday.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Fluxday.icns; sourceTree = "<group>"; };
+		AA2000000000000000000020 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +91,8 @@
 				AA2000000000000000000016 /* RecurringView.swift */,
 				AA2000000000000000000017 /* SummaryView.swift */,
 				AA2000000000000000000018 /* ScenariosView.swift */,
+				AA2000000000000000000019 /* Fluxday.icns */,
+				AA2000000000000000000020 /* Info.plist */,
 				AA2000000000000000000005 /* Localizable.xcstrings */,
 				AA2000000000000000000006 /* Assets.xcassets */,
 			);
@@ -169,6 +174,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA1000000000000000000020 /* Fluxday.icns in Resources */,
 				AA1000000000000000000005 /* Localizable.xcstrings in Resources */,
 				AA1000000000000000000006 /* Assets.xcassets in Resources */,
 			);
@@ -245,9 +251,8 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_APP_SANDBOX = NO;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = Fluxday;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Fluxday/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -268,9 +273,8 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_APP_SANDBOX = NO;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = Fluxday;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Fluxday/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",

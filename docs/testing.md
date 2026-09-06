@@ -1,9 +1,11 @@
-# Testing strategy
+# Testing
 
-`npm test` covers calendar validation, anchored recurrence, leap years, long ranges, daily cash flow, closing-balance gap detection, stress mode, scenario immutability, summaries and legacy import. `cargo test` exercises schema migration idempotency and atomic snapshot replacement.
+`swift test --package-path native/CashFlowCore` verifies checked minor-unit arithmetic, invalid and leap-year dates, anchored monthly and yearly recurrence, long ranges, daily forecasts, closing-balance cash gaps, expected-income stress mode, scenario immutability, summaries, and the v0.1.0 golden JSON fixture.
 
-`swift test --package-path native/CashFlowCore` verifies the portable native financial contract with checked minor-unit arithmetic, strict Gregorian dates, recurrence anchors, forecasts, cash gaps, stress mode, scenarios, summaries and the v0.1.0 golden JSON fixture. During migration, these Swift tests run alongside the v0.1.0 suites rather than replacing them.
+`swift test --package-path native/FluxdayPersistence` uses temporary real SQLite databases to verify schema setup, atomic replacement, restart persistence across store instances, portable backup round trips, read-only legacy detection, and complete v0.1.0 migration. Tests never use the production application-support database.
 
-`swift test --package-path native/FluxdayPersistence` uses temporary real SQLite databases to verify schema setup, atomic replacement, restart persistence, portable JSON, read-only legacy detection and complete v0.1.0 migration.
+The native GitHub Actions gate runs strict Swift formatting, both test packages, English/Russian String Catalog validation, and a code-signing-disabled Xcode build. Release branches additionally produce and inspect an unsigned universal application, ZIP, and DMG on a GitHub-hosted macOS runner.
 
-`swift format lint`, a code-signing-disabled native `xcodebuild`, `npm run lint`, `npm run typecheck`, `npm run format:check` and `npm run build` are required during migration. `npm run tauri build -- --bundles app` continues to verify the released v0.1.0 bundle until parity. UI smoke checks cover first-run import, empty and sample states, operation CRUD/undo, each primary view, narrow/normal/fullscreen layouts, long names, negative balances and large money values.
+Visual QA uses deterministic in-memory Debug fixtures. Most verification should be non-interactive or hosted in CI. Real window activation is reserved for behavior that cannot be checked reliably off-screen, such as menus, focus, sheets, hover, keyboard shortcuts, VoiceOver interaction, and final window resizing. Those checks are grouped into a single end-of-increment pass.
+
+The release matrix covers every primary view, English and Russian, Light and Dark Mode, compact and normal windows, long names, large values, negative balances, empty states, operation editing, Undo/Redo, migration preview, and backup restore. A successful check is not repeated unless relevant UI changes afterward.

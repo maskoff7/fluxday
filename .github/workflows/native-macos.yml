@@ -5,11 +5,13 @@ on:
     paths:
       - "native/**"
       - ".github/workflows/native-macos.yml"
+      - ".github/workflows/release.yml"
   push:
     branches: [main]
     paths:
       - "native/**"
       - ".github/workflows/native-macos.yml"
+      - ".github/workflows/release.yml"
 
 jobs:
   build:
@@ -44,3 +46,42 @@ jobs:
             -derivedDataPath native/.build/DerivedData \
             CODE_SIGNING_ALLOWED=NO \
             build
+
+  release-candidate:
+    if: github.event_name == 'pull_request' && startsWith(github.head_ref, 'maskoff/release-')
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build universal release application
+        run: |
+          xcodebuild \
+            -project native/Fluxday.xcodeproj \
+            -scheme Fluxday \
+            -configuration Release \
+            -derivedDataPath native/.build/ReleaseDerivedData \
+            CODE_SIGNING_ALLOWED=NO \
+            ONLY_ACTIVE_ARCH=NO \
+            ARCHS="arm64 x86_64" \
+            build
+      - name: Verify release metadata and architectures
+        run: |
+          APP="native/.build/ReleaseDerivedData/Build/Products/Release/Fluxday.app"
+          test "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$APP/Contents/Info.plist")" = "0.2.0"
+          test "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIconFile' "$APP/Contents/Info.plist")" = "Fluxday.icns"
+          lipo "$APP/Contents/MacOS/Fluxday" -verify_arch arm64 x86_64
+          test -f "$APP/Contents/Resources/Fluxday.icns"
+      - name: Package unsigned release artifacts
+        run: |
+          APP="native/.build/ReleaseDerivedData/Build/Products/Release/Fluxday.app"
+          mkdir -p native/.build/Artifacts/dmg
+          ditto "$APP" native/.build/Artifacts/dmg/Fluxday.app
+          ditto -c -k --sequesterRsrc --keepParent "$APP" native/.build/Artifacts/Fluxday-v0.2.0-macOS.zip
+          hdiutil create -volname Fluxday -srcfolder native/.build/Artifacts/dmg -ov -format UDZO native/.build/Artifacts/Fluxday-v0.2.0-macOS.dmg
+          shasum -a 256 native/.build/Artifacts/Fluxday-v0.2.0-macOS.zip native/.build/Artifacts/Fluxday-v0.2.0-macOS.dmg > native/.build/Artifacts/SHA256SUMS.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fluxday-v0.2.0-release-candidate
+          path: |
+            native/.build/Artifacts/Fluxday-v0.2.0-macOS.zip
+            native/.build/Artifacts/Fluxday-v0.2.0-macOS.dmg
+            native/.build/Artifacts/SHA256SUMS.txt

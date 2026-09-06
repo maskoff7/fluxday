@@ -1,23 +1,26 @@
 # Development guide
 
-Fluxday keeps `main` releasable. Work in a focused branch, use Conventional Commits, open a pull request linked to an issue and include screenshots for interface changes.
+Fluxday keeps `main` releasable. Work in a focused branch, use Conventional Commits, open a pull request linked to an issue, and include English screenshots when interface behavior changes.
 
-Before requesting review, run:
+Before requesting review, run the relevant checks during development and one complete native gate for the finished increment:
 
-```bash
-npm ci
-npm run format:check
-npm run lint
-npm run typecheck
-npm test
-cargo test --manifest-path src-tauri/Cargo.toml
-npm run build
+```sh
+swift format lint --recursive --strict native/Fluxday
+swift format lint --strict native/CashFlowCore/Package.swift
+swift format lint --recursive --strict native/CashFlowCore/Sources native/CashFlowCore/Tests
+swift format lint --strict native/FluxdayPersistence/Package.swift
+swift format lint --recursive --strict native/FluxdayPersistence/Sources native/FluxdayPersistence/Tests
+swift test --package-path native/CashFlowCore
+swift test --package-path native/FluxdayPersistence
+xcodebuild \
+  -project native/Fluxday.xcodeproj \
+  -scheme Fluxday \
+  -configuration Debug \
+  -derivedDataPath native/.build/DerivedData \
+  CODE_SIGNING_ALLOWED=NO \
+  build
 ```
 
-For a macOS change, also build the unsigned local application:
+Financial behavior belongs in `native/CashFlowCore` and requires focused regression tests. SQLite and migration work belongs in `native/FluxdayPersistence`. Keep SwiftUI and AppKit out of the financial core, treat imported data as untrusted, keep money in integer minor units, and keep financial dates free of timestamp and timezone conversions.
 
-```bash
-npm run tauri build -- --bundles app
-```
-
-Financial behavior belongs in `src/domain/` and requires regression tests. Treat imports as untrusted input, keep money in integer minor units and keep calendar dates free of timezone conversions. Do not add telemetry, network calls or user financial data to the repository.
+Prefer CLI tests, non-interactive rendering, and GitHub-hosted macOS checks. Group any necessary interactive window, menu, focus, hover, or accessibility QA into one pass before the pull request. Never add telemetry, network calls, or user financial data to the repository.

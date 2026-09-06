@@ -1,64 +1,65 @@
 # Fluxday
 
-**Your money, mapped day by day.** Fluxday is a private, local-first cash-flow planner for macOS. It shows when a future balance becomes tight, which payments caused it and how recurring-operation scenarios change the result.
+**Your money, mapped day by day.** Fluxday is a private, local-first cash-flow planner built natively for macOS with SwiftUI and Swift Charts. It shows when a future balance becomes tight, which payments caused it, and how recurring-operation scenarios change the result.
 
-> `v0.1.0` is the released Tauri implementation. Development of the fully native SwiftUI `v0.2.0` is tracked in [issue #13](https://github.com/maskoff7/fluxday/issues/13) and follows the [native migration plan](docs/native-macos-migration.md). The released application remains supported until native feature and data parity is verified.
-
-![Native Fluxday balance forecast and cash-gap outlook](docs/screenshots/native-planner.png)
+![Fluxday balance forecast and cash-gap outlook](docs/screenshots/native-planner.png)
 
 ## Highlights
 
-- Daily timeline, balance chart, Monday-first financial calendar and recurring-series management.
-- Certain vs expected operations and an explicit “without expected income” stress test.
-- Week, month, year and custom-period analytics with operation drill-down.
-- Sparse Base vs Scenario overrides that never mutate the base plan.
-- Integer minor-unit arithmetic and calendar-date recurrence without timezone drift.
-- SQLite autosave, JSON import preview, export, backup and legacy Cash Flow Planner compatibility.
-- Offline by design: no accounts, backend, telemetry or network calls.
+- Exact daily forecasts using integer minor-unit arithmetic.
+- Certain vs expected operations and a “without expected income” stress view.
+- Monday-first financial calendar and recurring series with anchored month-end behavior.
+- Week, month, year, and custom-period summaries with drill-down charts.
+- Base vs Scenario comparisons that never mutate the base plan.
+- Native menus, keyboard navigation, Undo/Redo, accessibility, Light/Dark Mode, and resizable layouts.
+- English interface with complete Russian localization.
+- SQLite autosave, portable backups, and safe migration from Fluxday v0.1.0.
+- Offline by design: no accounts, backend, telemetry, or network calls.
 
-## Requirements
+![Fluxday operations](docs/screenshots/native-operations.png)
 
-- macOS 12 or newer for the tested desktop experience.
-- Node.js 24+, npm 11+ and Rust 1.95+ for development.
-- Xcode Command Line Tools and the standard [Tauri macOS prerequisites](https://v2.tauri.app/start/prerequisites/).
+![Fluxday financial calendar](docs/screenshots/native-calendar.png)
 
-## Development
+![Fluxday scenario comparison](docs/screenshots/native-scenarios.png)
 
-```bash
-npm install
-npm run tauri dev
+## Install
+
+Fluxday v0.2.0 requires macOS 14 or later. Download the `.dmg` or `.zip` from the [latest release](https://github.com/maskoff7/fluxday/releases/latest), then move Fluxday to Applications.
+
+The current development build is unsigned because Apple Developer credentials are not available yet. macOS may require Control-clicking Fluxday in Finder and choosing **Open** on first launch. Signing and notarization are tracked in [issue #6](https://github.com/maskoff7/fluxday/issues/6).
+
+## Build and test
+
+Xcode 16 or later is required.
+
+```sh
+swift test --package-path native/CashFlowCore
+swift test --package-path native/FluxdayPersistence
+xcodebuild \
+  -project native/Fluxday.xcodeproj \
+  -scheme Fluxday \
+  -configuration Debug \
+  -derivedDataPath native/.build/DerivedData \
+  CODE_SIGNING_ALLOWED=NO \
+  build
 ```
 
-The browser-only UI is available with `npm run dev`; it uses local storage instead of SQLite and is intended for frontend development.
-
-## Quality checks
-
-```bash
-npm run format:check
-npm run lint
-npm run typecheck
-npm test
-cargo test --manifest-path src-tauri/Cargo.toml
-npm run build
-npm run tauri build -- --bundles app
-```
+Open `native/Fluxday.xcodeproj` in Xcode to run and debug the application.
 
 ## Data and backups
 
-Production data is stored in `fluxday.sqlite3` under the operating system's application-data directory. Export and backup create portable JSON; import always shows a preview and replaces the current plan only after confirmation. Legacy browser exports from `cashflow_planner.html` are supported.
+Fluxday automatically stores its plan in `~/Library/Application Support/app.fluxday.desktop/fluxday-native.sqlite3`.
 
-## Documentation
+On first launch, the native app detects the v0.1.0 database in the same application-support folder, shows a migration preview, and copies validated data into the new database without modifying the original. **Create Backup…** and **Restore from Backup…** use the versioned portable JSON format for manual transfer and recovery.
+
+## Architecture and documentation
 
 - [Architecture](docs/architecture.md)
-- [Data model](docs/data-model.md)
-- [Legacy audit](docs/legacy-audit.md)
-- [Brand](docs/brand.md)
-- [Testing](docs/testing.md)
 - [Financial algorithms](docs/financial-algorithms.md)
-- [Native data storage and migration](docs/native-data-migration.md)
-- [Product backlog](docs/product-backlog.md)
-- [v0.1.0 release notes](docs/release-v0.1.0.md)
-- [Native macOS migration plan](docs/native-macos-migration.md)
-- [Development and contributions](CONTRIBUTING.md)
+- [Data model](docs/data-model.md)
+- [Native storage and v0.1.0 migration](docs/native-data-migration.md)
+- [Testing](docs/testing.md)
+- [v0.2.0 release notes](docs/release-v0.2.0.md)
+- [Development guide](CONTRIBUTING.md)
 
-The original prototype is preserved in `reference/legacy/`. No license has been selected.
+The Tauri/React/Rust v0.1.0 source is preserved at the immutable [`v0.1.0` tag](https://github.com/maskoff7/fluxday/releases/tag/v0.1.0) and under `reference/legacy/tauri-v0.1.0/`. No license has been selected.
