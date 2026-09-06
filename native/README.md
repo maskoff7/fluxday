@@ -30,7 +30,7 @@ swift test --package-path native/FluxdayPersistence
 
 ## Visual QA
 
-The Debug build accepts `--demo` to display deterministic in-memory sample data without opening or writing either production database. This is only used for screenshots and interaction checks.
+The Debug build accepts `--demo` to display deterministic in-memory sample data without opening or writing either production database. Use `--demo-extremes` to exercise long names, large values, and negative balances. The `--light-appearance` and `--dark-appearance` flags make appearance QA deterministic without changing the system setting. These flags are only available in Debug builds.
 
 ![Native Fluxday planner in English](../docs/screenshots/native-planner.png)
 

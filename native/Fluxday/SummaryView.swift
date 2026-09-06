@@ -490,5 +490,6 @@ struct AnalyticsMetricCard: View {
     .padding(14)
     .frame(maxWidth: .infinity, minHeight: 82, alignment: .leading)
     .background(.quaternary.opacity(0.6), in: .rect(cornerRadius: 12))
+    .accessibilityElement(children: .combine)
   }
 }
