@@ -224,12 +224,14 @@ final class AppModel: ObservableObject {
     if recalculatesForecast { refreshForecast() }
     persist(updated)
     undoManager?.registerUndo(withTarget: self) { target in
-      target.apply(
-        previous,
-        replacing: updated,
-        recalculatesForecast: recalculatesForecast,
-        undoActionKey: undoActionKey
-      )
+      MainActor.assumeIsolated {
+        target.apply(
+          previous,
+          replacing: updated,
+          recalculatesForecast: recalculatesForecast,
+          undoActionKey: undoActionKey
+        )
+      }
     }
     undoManager?.setActionName(localizedUndoAction(undoActionKey))
   }
