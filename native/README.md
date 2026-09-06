@@ -45,3 +45,5 @@ The Debug build accepts `--demo` to display deterministic in-memory sample data 
 ![Native cash flow summary in English](../docs/screenshots/native-summary.png)
 
 ![Native scenario comparison in English](../docs/screenshots/native-scenarios.png)
+
+![Native language and backup settings in English](../docs/screenshots/native-settings.png)

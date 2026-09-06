@@ -21,6 +21,7 @@ struct FluxdayApp: App {
     Settings {
       SettingsView()
         .environment(\.locale, selectedLanguage.locale)
+        .environmentObject(model)
     }
   }
 }

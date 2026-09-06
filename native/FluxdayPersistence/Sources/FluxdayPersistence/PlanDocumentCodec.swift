@@ -2,7 +2,10 @@ import CashFlowCore
 import Foundation
 
 public enum PlanDocumentCodec {
+  public static let maximumDocumentSize = 32 * 1_024 * 1_024
+
   public static func decode(_ data: Data) throws -> CashFlowPlan {
+    guard data.count <= maximumDocumentSize else { throw PersistenceError.dataTooLarge }
     do {
       let plan = try JSONDecoder().decode(CashFlowPlan.self, from: data)
       try PlanValidator.validate(plan)

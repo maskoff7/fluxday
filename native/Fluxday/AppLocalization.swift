@@ -13,4 +13,8 @@ enum AppLocalization {
 
     return bundle.localizedString(forKey: key, value: key, table: nil)
   }
+
+  static func format(_ key: String, locale: Locale, _ arguments: CVarArg...) -> String {
+    String(format: string(key, locale: locale), locale: locale, arguments: arguments)
+  }
 }

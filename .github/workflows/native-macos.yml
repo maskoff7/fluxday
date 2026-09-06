@@ -28,7 +28,13 @@ jobs:
       - name: Test persistence and migration
         run: swift test --package-path native/FluxdayPersistence
       - name: Validate localization catalogs
-        run: jq empty native/Fluxday/Localizable.xcstrings native/Fluxday/Assets.xcassets/Contents.json
+        run: |
+          jq empty native/Fluxday/Localizable.xcstrings native/Fluxday/Assets.xcassets/Contents.json
+          jq -e '
+            .sourceLanguage == "en"
+            and all(.strings[]; ((.localizations.en.stringUnit.value // "") | length > 0))
+            and all(.strings[]; ((.localizations.ru.stringUnit.value // "") | length > 0))
+          ' native/Fluxday/Localizable.xcstrings > /dev/null
       - name: Build native application
         run: |
           xcodebuild \

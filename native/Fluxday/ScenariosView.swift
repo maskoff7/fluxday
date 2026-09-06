@@ -229,8 +229,11 @@ struct ScenariosView: View {
       AnalyticsMetricCard(
         title: "scenarios.metric.baseEnding",
         value: comparison.base.endingBalanceMinor.formatted(locale: locale),
-        dynamicCaption: AppLocalization.string("scenarios.metric.baseMinimum", locale: locale)
-          + " " + comparison.base.minimumBalanceMinor.formatted(locale: locale),
+        dynamicCaption: AppLocalization.format(
+          "scenarios.metric.baseMinimum",
+          locale: locale,
+          comparison.base.minimumBalanceMinor.formatted(locale: locale)
+        ),
         systemImage: "equal.circle.fill",
         tint: .secondary
       )
@@ -245,8 +248,11 @@ struct ScenariosView: View {
         title: "scenarios.metric.firstGap",
         value: comparison.scenario.firstNegativeDate?.formatted(locale: locale)
           ?? AppLocalization.string("scenarios.metric.noGap", locale: locale),
-        dynamicCaption: AppLocalization.string("scenarios.metric.deficit", locale: locale)
-          + " " + comparison.scenario.maximumDeficitMinor.formatted(locale: locale),
+        dynamicCaption: AppLocalization.format(
+          "scenarios.metric.deficit",
+          locale: locale,
+          comparison.scenario.maximumDeficitMinor.formatted(locale: locale)
+        ),
         systemImage: "exclamationmark.triangle.fill",
         tint: comparison.scenario.firstNegativeDate == nil ? .green : .red
       )
@@ -309,8 +315,7 @@ struct ScenariosView: View {
         .frame(minHeight: 280)
         .accessibilityLabel(
           Text(
-            "\(AppLocalization.string("scenarios.chart.accessibility", locale: locale)) \(scenario.name)"
-          )
+            AppLocalization.format("scenarios.chart.accessibility", locale: locale, scenario.name))
         )
       }
       .padding(8)
@@ -403,9 +408,12 @@ struct ScenariosView: View {
   }
 
   private func deltaCaption(_ delta: Money) -> String {
-    let prefix = AppLocalization.string("scenarios.metric.delta", locale: locale)
     let sign = delta.minorUnits > 0 ? "+" : nil
-    return "\(prefix) \(delta.formatted(locale: locale, sign: sign))"
+    return AppLocalization.format(
+      "scenarios.metric.delta",
+      locale: locale,
+      delta.formatted(locale: locale, sign: sign)
+    )
   }
 
   private var dateAxisTitle: String {

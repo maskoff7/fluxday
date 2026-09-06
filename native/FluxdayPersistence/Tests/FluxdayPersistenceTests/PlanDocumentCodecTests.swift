@@ -32,6 +32,11 @@ final class PlanDocumentCodecTests: XCTestCase {
     XCTAssertThrowsError(try PlanDocumentCodec.decode(raw)) { error in
       XCTAssertEqual(error as? PlanValidationError, .unsupportedSchemaVersion(99))
     }
+
+    let oversized = Data(count: PlanDocumentCodec.maximumDocumentSize + 1)
+    XCTAssertThrowsError(try PlanDocumentCodec.decode(oversized)) { error in
+      XCTAssertEqual(error as? PersistenceError, .dataTooLarge)
+    }
   }
 
   func testStorageLocationsKeepLegacyAndNativeDatabasesSeparate() throws {
